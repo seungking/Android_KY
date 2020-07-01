@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <TextView
+        android:id="@+id/btn_horizontal_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="#9b92b3"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_horizontal_coordinator_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="#9b92b3"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_horizontal_top_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="#9b92b3"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_vertical_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:text="6"
+        android:textColor="#9b92b3"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_samples_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="#9b92b3"
+        android:textStyle="bold" />
+
+</LinearLayout>
