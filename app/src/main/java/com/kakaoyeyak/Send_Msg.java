@@ -5,7 +5,17 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.kakao.kakaotalk.callback.TalkResponseCallback;
+import com.kakao.kakaotalk.response.MessageSendResponse;
+import com.kakao.kakaotalk.response.model.MessageFailureInfo;
+import com.kakao.kakaotalk.v2.KakaoTalkService;
+import com.kakao.message.template.LinkObject;
+import com.kakao.message.template.TemplateParams;
+import com.kakao.message.template.TextTemplate;
+import com.kakao.network.ErrorResult;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 //메시지 보내는 서비스
 public class Send_Msg extends Service {
@@ -47,7 +57,48 @@ public class Send_Msg extends Service {
 
         //여기서 설정한 시간에 맞는 값을 DB에서 찾아서
         //해당 인덱스에 해당하는 정보로 메시지 보내야함
-        //현제는 로그 출력 부분
+
+        ///// 임시로 get(0)으로만 보내게 해봄. /////
+        // 텍스트 템플릿 만들기
+        TemplateParams params = TextTemplate.newBuilder(Message.get(0), LinkObject.newBuilder()
+                .setWebUrl("https://developers.kakao.com")
+                .setMobileWebUrl("https://developers.kakao.com").build()).build();
+        // 선택한 카카오 친구에게 보내기
+        KakaoTalkService.getInstance()
+                .sendMessageToFriends(Collections.singletonList(Id.get(0)), params, new TalkResponseCallback<MessageSendResponse>() {
+                    @Override
+                    public void onNotKakaoTalkUser() {
+                        Log.e("KAKAO_API", "카카오톡 사용자가 아님");
+                    }
+
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+                    }
+
+                    @Override
+                    public void onFailure(ErrorResult errorResult) {
+                        Log.e("KAKAO_API", "친구에게 보내기 실패: " + errorResult);
+                    }
+
+                    @Override
+                    public void onSuccess(MessageSendResponse result) {
+                        if (result.successfulReceiverUuids() != null) {
+                            Log.i("KAKAO_API", "친구에게 보내기 성공");
+                            Log.d("KAKAO_API", "전송에 성공한 대상: " + result.successfulReceiverUuids());
+                        }
+                        if (result.failureInfo() != null) {
+                            Log.e("KAKAO_API", "일부 사용자에게 메시 보내기 실패");
+                            for (MessageFailureInfo failureInfo : result.failureInfo()) {
+                                Log.d("KAKAO_API", "code: " + failureInfo.code());
+                                Log.d("KAKAO_API", "msg: " + failureInfo.msg());
+                                Log.d("KAKAO_API", "failure_uuids: " + failureInfo.receiverUuids());
+                            }
+                        }
+                    }
+                });
+
+        //현재는 로그 출력 부분
         Log.d("LOG1",Hour.get(0) + "  " + Minute.get(0) + "  " + Id.get(0) + "  " + Name.get(0) + "  " + Message.get(0) + "  ");
 
         //메시지 보냈으므로 해당 인덱스 제거
