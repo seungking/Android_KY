@@ -77,7 +77,7 @@ public class HorizontalNtbActivity extends Activity {
                     //데이터 설정
                     initDataset();
 
-                    //뷰 연결
+//                    //뷰 연결
                     Context context = view.getContext();
                     RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_msg);
                     recyclerView.setHasFixedSize(true);
@@ -166,9 +166,9 @@ public class HorizontalNtbActivity extends Activity {
         //초기화
         //로컬 DB로 나중에 받기
         items.clear();
-        items.add(new Item_Msg("Message1", "몇시 몇분 누구에게 보냄"));
-        items.add(new Item_Msg("Message2", "몇시 몇분 누구에게 보냄"));
-        items.add(new Item_Msg("Message3",  "몇시 몇분 누구에게 보냄"));
-        items.add(new Item_Msg("Message4",  "몇시 몇분 누구에게 보냄"));
+        items.add(new Item_Msg("Message1", "1시 몇분 누구에게 보냄"));
+        items.add(new Item_Msg("Message2", "2시 몇분 누구에게 보냄"));
+        items.add(new Item_Msg("Message3",  "3시 몇분 누구에게 보냄"));
+        items.add(new Item_Msg("Message4",  "4시 몇분 누구에게 보냄"));
     }
 }

@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#CFCECE"
-    android:layout_height="wrap_content">
+    android:layout_height="100dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="1dp"
+    android:id="@+id/item_msg_layout"
+    android:background="#ffffff"
+    android:padding="10dp"
+    android:paddingStart="14dp"
+    android:paddingTop="18dp"
+    android:paddingEnd="14dp"
+    android:paddingBottom="16dp"
+    tools:ignore="UselessParent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:padding="15dp"
-        android:background="#ffffff"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
         <TextView
-            android:id="@+id/tv_name_msg"
-            android:text="bbb"
-            android:textSize="24dp"
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/item_text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/item_msg_profile"
+            android:textColor="#3C4D54"
+            android:textSize="13sp"
+            tools:text="line1" />
 
         <TextView
-            android:id="@+id/tv_summary_msg"
-            android:text="aaa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/item_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_text1"
+            android:layout_alignStart="@+id/item_text1"
+            android:layout_alignEnd="@+id/item_text1"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/worksans_bold"
+            android:textColor="#1D2C2F"
+            android:textSize="18sp"
+            tools:text="APP NAME" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/item_msg_profile"
+            style="@style/Expand.SenderAvatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/kakao_default_profile_image" />
 
-    <!--버튼-->
-    <ImageView
-        android:id="@+id/bt_search"
-        android:layout_gravity="center"
-        android:src="@drawable/kakao_account_logo"
-        android:background="@drawable/bg_round_rect"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
-        android:padding="10dp"
-        android:adjustViewBounds="true"
-        android:layout_marginBottom="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/item_text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_text2"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="24dp"
+            android:drawablePadding="16dp"
+            android:drawableTint="#45676E"
+            android:drawableStart="@drawable/ic_baseline_arrow_right_24"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="#3A4A51"
+            tools:text="BODY" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
