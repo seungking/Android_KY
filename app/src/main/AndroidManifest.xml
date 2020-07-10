@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 백그라운드 권환 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".GlobalApplication"
@@ -15,14 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".YeyakMain"></activity>
+        <activity android:name=".YeyakMain"/>
         <activity android:name=".FriendsList" />
-        <activity android:name=".HorizontalNtbActivity" />
+        <activity android:name=".HorizontalNtbActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- 카카오 링크 api 활성화 -->
@@ -43,11 +44,14 @@
             android:value="@string/kakao_app_key" />
 
         <!-- 백그라운드 알람 -->
-        <receiver android:name=".Alarm_Reciver" />
-
+        <receiver android:name=".Alarm_Receiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
         <service
             android:name=".Send_Msg"
-            android:enabled="true"></service>
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>

@@ -55,6 +55,9 @@ public class RecyclerViewAdapter_Friend extends RecyclerView.Adapter<RecyclerVie
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), YeyakMain.class);
 
+                // 알람 동적 설정을 위해 YeyakMain의 broadcastCode를 증가시킴.
+                YeyakMain.broadcastCode++;
+
                 // 해당 유저 uid, id, 닉네임 다음 창으로 가져감
                 intent.putExtra("UserUID",mFriend.get(position).uuid);
                 intent.putExtra("UserID",mFriend.get(position).userid);
