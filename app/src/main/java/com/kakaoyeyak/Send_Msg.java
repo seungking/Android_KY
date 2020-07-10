@@ -14,9 +14,226 @@ import com.kakao.message.template.TemplateParams;
 import com.kakao.message.template.TextTemplate;
 import com.kakao.network.ErrorResult;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+
+import org.jetbrains.annotations.Nullable;
+
+
+public class Send_Msg extends Service {
+
+    public String id;
+    public String name;
+    public String message;
+
+    ArrayList<String> B_id = new ArrayList<String>(); // broadcastCode 저장.
+    ArrayList<String> Time = new ArrayList<String>();
+    ArrayList<String> Id = new ArrayList<String>();
+    ArrayList<String> Name = new ArrayList<String>();
+    ArrayList<String> Message = new ArrayList<String>();
+
+    ManagePref managePref = new ManagePref();
+
+
+    private boolean isRunning;
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        Log.d("LOG1","처음으로 알람 서비스가 실행되었습니다. 로컬 DB 연결 시작");
+
+        B_id = managePref.getStringArrayPref(this,"BroadCastID");
+        Time = managePref.getStringArrayPref(this,"time");
+        Id = managePref.getStringArrayPref(this,"id");
+        Name = managePref.getStringArrayPref(this,"name");
+        Message = managePref.getStringArrayPref(this,"message");
+
+        Log.d("LOG1","로컬 DB 연결 완료");
+
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // Foreground 에서 실행되면 Notification 을 보여줘야 됨
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Oreo(26) 버전 이후 버전부터는 channel 이 필요함
+            String channelId =  createNotificationChannel();
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
+            Notification notification = builder.setOngoing(true)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("YK_MSG")
+                    .setContentText("전송 완료")
+                    .build();
+
+            startForeground(1, notification);
+        }
+
+        String state = intent.getStringExtra("state");
+
+        if (state.equals("on")) {
+            // 알람음 재생 OFF, 알람음 시작 상태
+
+            this.isRunning = true;
+
+            Log.d("AlarmService", "Alarm Start");
+            Log.d("LOG1","카톡 메세지를 전송합니다.");
+            // To Do
+            ///// 임시로 get(0)으로만 보내게 해봄. /////
+            // 텍스트 템플릿 만들기
+
+            // 현재 시간 -> 분 저장
+            long now = System.currentTimeMillis();
+            Date mDate = new Date(now);
+            SimpleDateFormat simpleDate = new SimpleDateFormat("MM 월 dd 일 HH 시 mm 분");
+            String getTime = simpleDate.format(mDate);
+
+
+            Log.e("현재 시간과 비교합니다. 현재 시간",getTime);
+            // Minute.indexOf(getTime);
+
+            int idx = 0;
+            for(int i=0;i < Time.size();i++){
+                SimpleDateFormat haveTime = new SimpleDateFormat("MM 월 dd 일 HH 시 mm 분");
+                Date finder = null;
+                Date nower = null;
+                try {
+                    finder = haveTime.parse(Time.get(i));
+                    nower = haveTime.parse(getTime);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if(nower.compareTo(finder) == 0) {
+                    Log.e("현재 시간과 동일한 인덱스를 찾았습니다. ", "동일 시간: "+Time.get(i)+"인덱스: "+i);
+                    idx = i;
+                    break;
+                }
+            }
+
+            TemplateParams params = TextTemplate.newBuilder(Message.get(idx), LinkObject.newBuilder()
+                    .setWebUrl("https://developers.kakao.com")
+                    .setMobileWebUrl("https://developers.kakao.com").build()).build();
+            // 선택한 카카오 친구에게 보내기
+            KakaoTalkService.getInstance()
+                    .sendMessageToFriends(Collections.singletonList(Id.get(idx)), params, new TalkResponseCallback<MessageSendResponse>() {
+                        @Override
+                        public void onNotKakaoTalkUser() {
+                            Log.e("KAKAO_API", "카카오톡 사용자가 아님");
+                        }
+
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+                            Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+                        }
+
+                        @Override
+                        public void onFailure(ErrorResult errorResult) {
+                            Log.e("KAKAO_API", "친구에게 보내기 실패: " + errorResult);
+                        }
+
+                        @Override
+                        public void onSuccess(MessageSendResponse result) {
+                            if (result.successfulReceiverUuids() != null) {
+                                Log.i("KAKAO_API", "친구에게 보내기 성공");
+                                Log.d("KAKAO_API", "전송에 성공한 대상: " + result.successfulReceiverUuids());
+                            }
+                            if (result.failureInfo() != null) {
+                                Log.e("KAKAO_API", "일부 사용자에게 메시 보내기 실패");
+                                for (MessageFailureInfo failureInfo : result.failureInfo()) {
+                                    Log.d("KAKAO_API", "code: " + failureInfo.code());
+                                    Log.d("KAKAO_API", "msg: " + failureInfo.msg());
+                                    Log.d("KAKAO_API", "failure_uuids: " + failureInfo.receiverUuids());
+                                }
+                            }
+                        }
+                    });
+
+            Log.d("알람 번호 LOG", B_id.get(idx));
+            Log.d("보낸 시간 LOG", Time.get(idx));
+            Log.d("받는이 / 메세지 내용", Name.get(idx) + "  " + Message.get(idx) + "  ");
+
+            Log.d("LOG1","카톡 메세지 전송 끝. 해당 정보를 삭제합니다.");
+            B_id.remove(idx);
+            Time.remove(idx);
+            Id.remove(idx);
+            Name.remove(idx);
+            Message.remove(idx);
+            //로컬에 업데이트
+            managePref.setStringArrayPref(this,"BroadCastID",B_id);
+            managePref.setStringArrayPref(this,"hour",Time);
+            managePref.setStringArrayPref(this,"id",Id);
+            managePref.setStringArrayPref(this,"name",Name);
+            managePref.setStringArrayPref(this,"message",Message);
+
+            Log.d("LOG1","해당 정보 삭제 완료");
+
+        } else if (state.equals("off")) {
+            // 알람음 재생 ON, 알람음 중지 상태
+
+            this.isRunning = false;
+
+            Log.d("AlarmService", "Alarm Stop");
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                stopForeground(true);
+            }
+        }
+
+        return START_NOT_STICKY;
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private String createNotificationChannel() {
+        String channelId = "Alarm";
+        String channelName = getString(R.string.app_name);
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_NONE);
+        //channel.setDescription(channelName);
+        channel.setSound(null, null);
+        channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.createNotificationChannel(channel);
+
+        return channelId;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Log.d("LOG1","알람 서비스를 종료합니다. 로컬 DB 연결 해제");
+
+        managePref.setStringArrayPref(this,"BroadCastID",B_id);
+        managePref.setStringArrayPref(this,"hour",Time);
+        managePref.setStringArrayPref(this,"id",Id);
+        managePref.setStringArrayPref(this,"name",Name);
+        managePref.setStringArrayPref(this,"message",Message);
+
+        Log.d("LOG1","로컬 DB 연결 해제 완료");
+    }
+}
+
+
+/*
 //메시지 보내는 서비스
 public class Send_Msg extends Service {
 
@@ -124,3 +341,5 @@ public class Send_Msg extends Service {
         managePref.setStringArrayPref(this,"message",Message);
     }
 }
+
+ */
