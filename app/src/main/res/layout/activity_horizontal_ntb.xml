@@ -17,6 +17,13 @@
         android:gravity="end"
         android:orientation="horizontal"></LinearLayout>
 
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/list_msg_toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="0.7"-->
+<!--        android:background="#FFEB3B" />-->
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_horizontal_ntb"
         android:layout_width="match_parent"

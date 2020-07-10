@@ -65,4 +65,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     implementation 'com.r0adkll:slidableactivity:2.1.0'
+
 }

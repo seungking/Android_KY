@@ -3,9 +3,11 @@ package com.kakaoyeyak;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,38 +27,23 @@ public class Item_Msg_Detail extends AppCompatActivity {
 
     public static final String EXTRA_OS = "extra_os_version";
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R.id.title)
-    TextView mTitle;
-    @BindView(R.id.description)
-    TextView mDescription;
-    @BindView(R.id.date)
-    TextView mDate;
-    @BindView(R.id.version)
-    TextView mVersion;
-    @BindView(R.id.sdk)
-    TextView mSdk;
-    @BindView(R.id.position)
-    TextView mPosition;
+    Toolbar toolbar;
+
+//    @BindView(R.id.title)
+//    TextView mTitle;
 
     private SlidrConfig mConfig;
-    private static Random random = new Random();
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item__msg__detail);
 //        ButterKnife.bind(this);
-
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
         // Get the status bar colors to interpolate between
         int primary = getResources().getColor(R.color.primaryDark);
         int secondary = Color.WHITE;
-
-//        // Build the slidr config
-//        int numPositions = SlidrPosition.values().length;
-//        SlidrPosition position = SlidrPosition.values()[random.nextInt(numPositions)];
-//        mPosition.setText(position.name());
 
         mConfig = new SlidrConfig.Builder()
                 .primaryColor(primary)
@@ -71,17 +58,11 @@ public class Item_Msg_Detail extends AppCompatActivity {
         // Attach the Slidr Mechanism to this activity
         Slidr.attach(this, mConfig);
 
-//        setSupportActionBar(mToolbar);
-//        getSupportActionBar().setTitle("");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @OnClick({R.id.color1, R.id.color2, R.id.color3, R.id.color4, R.id.color5})
-    void onColorClicked(View v) {
-        int color = ((ColorDrawable) v.getBackground()).getColor();
-        getWindow().setStatusBarColor(color);
-        mConfig.setColorSecondary(color);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

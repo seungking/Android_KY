@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kakaoyeyak">
-<<<<<<< Updated upstream
+
 
     <uses-permission android:name="android.permission.INTERNET" />
-=======
+
     <!-- 카카오 서비스 인터넷으로 정보 얻을 수 있는 권환 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 백그라운드 권환 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
->>>>>>> Stashed changes
 
     <application
         android:name=".GlobalApplication"
@@ -45,16 +44,14 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-<<<<<<< Updated upstream
             android:value="@string/kakao_app_key" />
-=======
-            android:value="@string/kakao_app_key" /> <!-- 백그라운드 알람 -->
+
         <receiver android:name=".Alarm_Reciver" />
 
         <service
             android:name=".Send_Msg"
             android:enabled="true" />
->>>>>>> Stashed changes
+
     </application>
 
 </manifest>

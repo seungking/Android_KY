@@ -7,10 +7,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -21,7 +24,15 @@ import java.util.ArrayList;
 import devlight.io.library.ntb.NavigationTabBar;
 
 //메인 with 네비게이션 텝 바
-public class HorizontalNtbActivity extends Activity {
+public class HorizontalNtbActivity extends AppCompatActivity {
+
+    ArrayList<String> Hour = new ArrayList<String>();
+    ArrayList<String> Minute = new ArrayList<String>();
+    ArrayList<String> Id = new ArrayList<String>();
+    ArrayList<String> Name = new ArrayList<String>();
+    ArrayList<String> Message = new ArrayList<String>();
+
+    ManagePref managePref = new ManagePref();
 
     //설정 메시지 항목들
     private ArrayList<Item_Msg> items = new ArrayList<>();
@@ -29,22 +40,21 @@ public class HorizontalNtbActivity extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_horizontal_ntb);
 
+        //데이터 설정
+        initDataset();
         //설정
         initUI();
-
-        //친구목록으로
+//        //친구목록으로
         findViewById(R.id.addmessage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HorizontalNtbActivity.this, FriendsList.class));
             }
         });
-
     }
+
 
     //설정
     private void initUI() {
@@ -73,9 +83,6 @@ public class HorizontalNtbActivity extends Activity {
                 if(position==0) {
                     view = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.item_vp_list, null, false);
-
-                    //데이터 설정
-                    initDataset();
 
 //                    //뷰 연결
                     Context context = view.getContext();
@@ -170,5 +177,15 @@ public class HorizontalNtbActivity extends Activity {
         items.add(new Item_Msg("Message2", "2시 몇분 누구에게 보냄"));
         items.add(new Item_Msg("Message3",  "3시 몇분 누구에게 보냄"));
         items.add(new Item_Msg("Message4",  "4시 몇분 누구에게 보냄"));
+
+        Hour = managePref.getStringArrayPref(this,"hour");
+        Minute = managePref.getStringArrayPref(this,"minute");
+        Id = managePref.getStringArrayPref(this,"id");
+        Name = managePref.getStringArrayPref(this,"name");
+        Message = managePref.getStringArrayPref(this,"message");
+
+        for(int i=0; i<Hour.size(); i++){
+            items.add(new Item_Msg(Name.get(i),  Message.get(i)));
+        }
     }
 }
