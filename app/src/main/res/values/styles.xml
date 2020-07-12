@@ -11,4 +11,44 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="Theme.Slidr" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/textPrimary</item>
+        <item name="android:textColorSecondary">@color/textSecondary</item>
+        <item name="android:divider">@color/divider</item>
+    </style>
+
+    <style name="Theme.Slidr.Slidable" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primaryDark</item>
+    <item name="colorAccent">@color/accent</item>
+    <item name="android:textColorPrimary">@color/textPrimary</item>
+    <item name="android:textColorSecondary">@color/textSecondary</item>
+    <item name="android:divider">@color/divider</item>
+
+    <!-- These values must be set for this mechanism to work -->
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Expand" />
+    <style name="Expand.SenderAvatar">
+        <item name="civ_border_color">#F0F2F4</item>
+        <item name="civ_border_width">1dp</item>
+    </style>
+
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
+
+    <style name="ActionBarPopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
