@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,15 +44,20 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 //        holder.summary.setText(mPersons.get(position).summary);
-        holder.item_text1.setText("Time");
-        holder.item_text2.setText("NAME");
-        holder.item_text3.setText(R.string.temp_string);
-        holder.circleImageView.setImageResource(R.drawable.kakao_default_profile_image);
+        holder.item_text1.setText(mPersons.get(position).getTime());
+        holder.item_text2.setText(mPersons.get(position).getName());
+        holder.item_text3.setText(mPersons.get(position).getSummary());
+
+        Glide.with(mContext)
+                .load(mPersons.get(position).profileimage)
+                .centerCrop()
+                .into(holder.circleImageView);
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent viewer = new Intent(v.getContext(), Item_Msg_Detail.class);
+                viewer.putExtra("position",position);
                 v.getContext().startActivity(viewer);
             }
         });
@@ -61,6 +68,12 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
         return mPersons.size();
     }
 
+
+    public void removeItem(int position){
+        mPersons.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(0, mPersons.size());
+    }
 
     //ViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
