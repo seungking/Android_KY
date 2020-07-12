@@ -13,28 +13,67 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="날짜와 요일, 시간을 선택해 주세요."/>
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false">
+
+        </DatePicker>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TimePicker
             android:id="@+id/time_picker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner"/>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="예약 카톡 메시지 입력">
+
+    </TextView>
+    <EditText
+        android:id="@+id/katok_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </EditText>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
-            android:layout_width="60dp"
-            android:layout_height="50dp"
             android:id="@+id/btn_start"
-            android:text="시작"/>
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="보내기" />
 
         <Button
-            android:layout_width="60dp"
-            android:layout_height="50dp"
             android:id="@+id/btn_finish"
-            android:text="종료" />
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="강제종료" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="데이터 클리어" />
 
     </LinearLayout>
 
