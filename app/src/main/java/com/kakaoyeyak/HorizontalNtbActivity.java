@@ -97,11 +97,15 @@ public class HorizontalNtbActivity extends AppCompatActivity {
                 else {
                     //세팅
                     view = LayoutInflater.from(
+                            getBaseContext()).inflate(R.layout.setting, null, false);
+                    /*
+                    view = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.activity_setting, null, false);
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.settings_fragment, new SettingPreferenceFragmentMain())
                             .addToBackStack(null)
                             .commit();
+                     */
                 }
 
                 //화면에 뷰 추가
