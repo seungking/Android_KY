@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="기본정보">
+        <Preference
+            android:key="notice"
+            android:title="공지사항"
+            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+
+        <Preference
+            android:key="info"
+            android:title="어플 버전"
+            android:summary="1.0"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="메인 설정">
+
+        <SwitchPreference
+            android:key="notification"
+            android:title="알림"
+            android:summary="예약 카톡 전송이 완료되었을 경우 상태 바에 '전송완료'를 노출할지 결정합니다."
+            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+
+        <Preference
+            android:key="friend_sync"
+            android:title="친구"
+            android:summary="친구 목록을 동기화합니다."
+            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+
+        <ListPreference
+            android:key="screen_mode"
+            android:title="화면 모드"
+            android:summary="다크, 화이트"/>
+
+        <Preference
+            android:key="msg_template"
+            android:title="메세지 템플릿"
+            android:summary="메세지 템플릿을 변경합니다."
+            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="기타 설정">
+        <Preference
+            android:key="logout"
+            android:title="로그아웃"
+            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+
+        <Preference
+            android:key="help"
+            android:title="도움말"/>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="메시지 알림">
+        <SwitchPreference
+            android:key="message"
+            android:title="메시지 알림"/>
+        <Preference
+            android:key="keyword_screen"
+            android:title="키워드 알림1"
+            android:summary="사용안함"
+            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+
+        <SwitchPreference
+            android:key="sound"
+            android:title="소리"/>
+        <ListPreference
+
+            android:key="sound_list"
+            android:summary="카톡"
+            android:title="알림음음"
+            />
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,5 +1,6 @@
 package com.kakaoyeyak;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -21,7 +24,7 @@ import java.util.ArrayList;
 import devlight.io.library.ntb.NavigationTabBar;
 
 //메인 with 네비게이션 텝 바
-public class HorizontalNtbActivity extends Activity {
+public class HorizontalNtbActivity extends AppCompatActivity {
 
     //설정 메시지 항목들
     private ArrayList<Item_Msg> items = new ArrayList<>();
@@ -66,6 +69,7 @@ public class HorizontalNtbActivity extends Activity {
                 ((ViewPager) container).removeView((View) object);
             }
 
+            @SuppressLint("ResourceType")
             @Override
             public Object instantiateItem(final ViewGroup container, final int position) {
                 final View view;
@@ -93,7 +97,11 @@ public class HorizontalNtbActivity extends Activity {
                 else {
                     //세팅
                     view = LayoutInflater.from(
-                            getBaseContext()).inflate(R.layout.setting, null, false);
+                            getBaseContext()).inflate(R.layout.activity_setting, null, false);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.settings_fragment, new SettingPreferenceFragmentMain())
+                            .addToBackStack(null)
+                            .commit();
                 }
 
                 //화면에 뷰 추가
@@ -170,5 +178,10 @@ public class HorizontalNtbActivity extends Activity {
         items.add(new Item_Msg("Message2", "몇시 몇분 누구에게 보냄"));
         items.add(new Item_Msg("Message3",  "몇시 몇분 누구에게 보냄"));
         items.add(new Item_Msg("Message4",  "몇시 몇분 누구에게 보냄"));
+    }
+
+    public void go_settings(View view) {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
     }
 }

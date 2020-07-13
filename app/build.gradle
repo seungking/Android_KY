@@ -60,4 +60,7 @@ dependencies {
 
     //원 이미지뷰
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    // 세팅 뷰
+    implementation 'androidx.preference:preference:1.1.0'
 }
