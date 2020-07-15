@@ -31,7 +31,9 @@
         <activity android:name=".HorizontalNtbActivity" />
 
         <activity android:name=".MainActivity" />
+        <activity android:name=".SettingsActivity"/>"
         <activity android:name=".LoginActivity">
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

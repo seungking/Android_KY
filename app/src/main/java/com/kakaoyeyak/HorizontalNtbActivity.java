@@ -1,5 +1,6 @@
 package com.kakaoyeyak;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,6 +90,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
                 ((ViewPager) container).removeView((View) object);
             }
 
+            @SuppressLint("ResourceType")
             @Override
             public Object instantiateItem(final ViewGroup container, final int position) {
                 final View view;
@@ -113,6 +116,14 @@ public class HorizontalNtbActivity extends AppCompatActivity {
                     //세팅
                     view = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.setting, null, false);
+                    /*
+                    view = LayoutInflater.from(
+                            getBaseContext()).inflate(R.layout.activity_setting, null, false);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.settings_fragment, new SettingPreferenceFragmentMain())
+                            .addToBackStack(null)
+                            .commit();
+                     */
                 }
 
                 //화면에 뷰 추가
@@ -231,5 +242,10 @@ public class HorizontalNtbActivity extends AppCompatActivity {
         for(int i=0; i<Time.size(); i++){
             items.add(new Item_Msg(Time.get(i)  ,Name.get(i),  Message.get(i),Profile.get(i)));
         }
+    }
+
+    public void go_settings(View view) {
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        startActivity(intent);
     }
 }
