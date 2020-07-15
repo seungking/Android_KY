@@ -63,4 +63,10 @@ dependencies {
 
     // 세팅 뷰
     implementation 'androidx.preference:preference:1.1.0'
+
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    implementation 'com.r0adkll:slidableactivity:2.1.0'
+
 }

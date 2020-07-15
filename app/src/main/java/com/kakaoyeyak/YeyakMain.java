@@ -47,6 +47,7 @@ public class YeyakMain extends AppCompatActivity {
     ArrayList<String> Id = new ArrayList<String>();
     ArrayList<String> Name = new ArrayList<String>();
     ArrayList<String> Message = new ArrayList<String>();
+    ArrayList<String> Profile = new ArrayList<String>();
 
     ManagePref managePref = new ManagePref();
 
@@ -55,6 +56,7 @@ public class YeyakMain extends AppCompatActivity {
     public String UID;
     public String ID;
     public String NName;
+    public String ProfileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +69,11 @@ public class YeyakMain extends AppCompatActivity {
         UID = intent.getExtras().getString("UserUID");
         ID = intent.getExtras().getString("UserID");
         NName = intent.getExtras().getString("UserName");
+        ProfileUri = intent.getExtras().getString("ProfileUri");
 
         // 로그로 선택된 사람 확인해보라고 남겨놨음.
         // I/보낼 사람 UID,ID,Name:: 4dPm0ObT49ThzfrD8MDzy_rK5tLn1uXS4JI/1395494438/안승기
-        Log.i("보낼 사람 UID,ID,Name: ",UID+"/"+ID+"/"+NName);
+        Log.i("보낼 사람 UID,ID,Name: ",UID+"/"+ID+"/"+NName+"/"+ProfileUri);
 
         this.alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         this.datePicker = findViewById(R.id.date_picker);
@@ -89,6 +92,7 @@ public class YeyakMain extends AppCompatActivity {
         Id = managePref.getStringArrayPref(this,"id");
         Name = managePref.getStringArrayPref(this,"name");
         Message = managePref.getStringArrayPref(this,"message");
+        Profile = managePref.getStringArrayPref(this,"profile");
 
         // 현재까지 저장된 넘들 확인해봄.
         Log.e("BroadCastID",B_id.toString());
@@ -96,6 +100,7 @@ public class YeyakMain extends AppCompatActivity {
         Log.e("UUID",Id.toString());
         Log.e("Name",Name.toString());
         Log.e("Msg",Message.toString());
+        Log.e("Profile",Profile.toString());
 
     }
 
@@ -130,6 +135,7 @@ public class YeyakMain extends AppCompatActivity {
         Id.add(UID); // 선택한 유저 UID 저장함
         Name.add(NName); // 선택한 유저 닉네임 저장함
         Message.add(katok_msg.getText().toString()); // 보낼 메세지 저장함
+        Profile.add(ProfileUri);
 
         //로컬에 업데이트
         managePref.setStringArrayPref(YeyakMain.this,"BroadCastID",B_id);
@@ -137,6 +143,7 @@ public class YeyakMain extends AppCompatActivity {
         managePref.setStringArrayPref(YeyakMain.this,"id",Id);
         managePref.setStringArrayPref(YeyakMain.this,"name",Name);
         managePref.setStringArrayPref(YeyakMain.this,"message",Message);
+        managePref.setStringArrayPref(YeyakMain.this,"profile",Profile);
 
         // Receiver 설정
         Intent intent = new Intent(this, Alarm_Receiver.class);
@@ -208,12 +215,14 @@ public class YeyakMain extends AppCompatActivity {
                     managePref.setStringArrayPref(YeyakMain.this,"id",Id);
                     managePref.setStringArrayPref(YeyakMain.this,"name",Name);
                     managePref.setStringArrayPref(YeyakMain.this,"message",Message);
+                    managePref.setStringArrayPref(YeyakMain.this,"profile",Profile);
                     // 현재까지 저장된 넘들 확인해봄.
                     Log.e("BroadCastID",B_id.toString());
                     Log.e("Time", Time.toString());
                     Log.e("UUID",Id.toString());
                     Log.e("Name",Name.toString());
                     Log.e("Msg",Message.toString());
+                    Log.e("Profile",Profile.toString());
 
                     break;
             }
