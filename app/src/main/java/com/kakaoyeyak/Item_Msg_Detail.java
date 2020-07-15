@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,17 +36,15 @@ public class Item_Msg_Detail extends AppCompatActivity {
 
     Toolbar toolbar;
 
-    ArrayList<String> Hour = new ArrayList<String>();
-    ArrayList<String> Minute = new ArrayList<String>();
-    ArrayList<String> Id = new ArrayList<String>();
-    ArrayList<String> Name = new ArrayList<String>();
-    ArrayList<String> Message = new ArrayList<String>();
-    ArrayList<String> profileimages = new ArrayList<String>();
-
     ManagePref managePref = new ManagePref();
 
     private SlidrConfig mConfig;
     int position = 0;
+
+    public String Time;
+    public String Message;
+    public String NName;
+    public String ProfileUri;
 
     @BindView(R.id.item_msg_detail_nickanme)
     TextView name;
@@ -76,15 +76,19 @@ public class Item_Msg_Detail extends AppCompatActivity {
 
         Intent intent = getIntent();
         position = intent.getIntExtra("position",0);
-        initData();
+
+        Time = intent.getExtras().getString("time");
+        Message = intent.getExtras().getString("message");
+        NName = intent.getExtras().getString("name");
+        ProfileUri = intent.getExtras().getString("profile");
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
 
-        name.setText(Name.get(position));
-        time.setText(Hour.get(position) + "  :  " +  Minute.get(position));
-        msg.setText(Message.get(position));
+        name.setText(NName);
+        time.setText(Time);
+        msg.setText(Message);
         Glide.with(this)
-                .load(profileimages.get(position))
+                .load(ProfileUri)
                 .centerCrop()
                 .into(profile);
 
@@ -114,21 +118,6 @@ public class Item_Msg_Detail extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                Hour.remove(position);
-                Minute.remove(position);
-                Id.remove(position);
-                Name.remove(position);
-                Message.remove(position);
-                profileimages.remove(position);
-
-                managePref.setStringArrayPref(Item_Msg_Detail.this,"hour",Hour);
-                managePref.setStringArrayPref(Item_Msg_Detail.this,"minute",Minute);
-                managePref.setStringArrayPref(Item_Msg_Detail.this,"id",Id);
-                managePref.setStringArrayPref(Item_Msg_Detail.this,"name",Name);
-                managePref.setStringArrayPref(Item_Msg_Detail.this,"message",Message);
-                managePref.setStringArrayPref(Item_Msg_Detail.this,"profileimage",profileimages);
-
                 HorizontalNtbActivity.removeItem(position);
                 finish();
             }
@@ -151,14 +140,4 @@ public class Item_Msg_Detail extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    private void initData() {
-
-        Hour = managePref.getStringArrayPref(this,"hour");
-        Minute = managePref.getStringArrayPref(this,"minute");
-        Id = managePref.getStringArrayPref(this,"id");
-        Name = managePref.getStringArrayPref(this,"name");
-        Message = managePref.getStringArrayPref(this,"message");
-        profileimages = managePref.getStringArrayPref(this,"profileimage");
-
-    }
 }

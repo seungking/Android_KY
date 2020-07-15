@@ -44,6 +44,7 @@ public class Send_Msg extends Service {
     ArrayList<String> Id = new ArrayList<String>();
     ArrayList<String> Name = new ArrayList<String>();
     ArrayList<String> Message = new ArrayList<String>();
+    ArrayList<String> Profile = new ArrayList<String>();
 
     ManagePref managePref = new ManagePref();
 
@@ -67,6 +68,7 @@ public class Send_Msg extends Service {
         Id = managePref.getStringArrayPref(this,"id");
         Name = managePref.getStringArrayPref(this,"name");
         Message = managePref.getStringArrayPref(this,"message");
+        Profile = managePref.getStringArrayPref(this,"profile");
 
         Log.d("LOG1","로컬 DB 연결 완료");
 
@@ -178,12 +180,14 @@ public class Send_Msg extends Service {
             Id.remove(idx);
             Name.remove(idx);
             Message.remove(idx);
+            Profile.remove(idx);
             //로컬에 업데이트
             managePref.setStringArrayPref(this,"BroadCastID",B_id);
             managePref.setStringArrayPref(this,"hour",Time);
             managePref.setStringArrayPref(this,"id",Id);
             managePref.setStringArrayPref(this,"name",Name);
             managePref.setStringArrayPref(this,"message",Message);
+            managePref.setStringArrayPref(this,"profile",Profile);
 
             Log.d("LOG1","해당 정보 삭제 완료");
 
@@ -227,6 +231,7 @@ public class Send_Msg extends Service {
         managePref.setStringArrayPref(this,"id",Id);
         managePref.setStringArrayPref(this,"name",Name);
         managePref.setStringArrayPref(this,"message",Message);
+        managePref.setStringArrayPref(this,"profile",Profile);
 
         Log.d("LOG1","로컬 DB 연결 해제 완료");
     }

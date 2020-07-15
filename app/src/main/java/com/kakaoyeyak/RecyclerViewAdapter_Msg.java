@@ -58,6 +58,10 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
             public void onClick(View v) {
                 Intent viewer = new Intent(v.getContext(), Item_Msg_Detail.class);
                 viewer.putExtra("position",position);
+                viewer.putExtra("time",mPersons.get(position).getTime());
+                viewer.putExtra("name",mPersons.get(position).getName());
+                viewer.putExtra("message",mPersons.get(position).getSummary());
+                viewer.putExtra("profile",mPersons.get(position).getProfileimage());
                 v.getContext().startActivity(viewer);
             }
         });
@@ -80,9 +84,6 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
         public TextView item_text1;
         public TextView item_text2;
         public TextView item_text3;
-        public ImageView imageView;
-        public TextView summary;
-        ImageView search;
         RelativeLayout layout;
         CircleImageView circleImageView;
 
@@ -93,10 +94,6 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
             item_text2 = (TextView) itemView.findViewById(R.id.item_text2);
             item_text3 = (TextView) itemView.findViewById(R.id.item_text3);
             circleImageView = (CircleImageView) itemView.findViewById(R.id.item_msg_profile);
-//            name = (TextView) itemView.findViewById(R.id.tv_name_msg);
-//            summary = (TextView) itemView.findViewById(R.id.tv_summary_msg);
-//            search = (ImageView) itemView.findViewById(R.id.bt_search);
-//            search.setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
             layout = (RelativeLayout) itemView.findViewById(R.id.item_msg_layout);
         }
     }
