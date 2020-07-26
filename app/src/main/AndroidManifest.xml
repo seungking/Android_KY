@@ -31,6 +31,10 @@
         <activity android:name=".HorizontalNtbActivity" />
 
         <activity android:name=".MainActivity" />
+<<<<<<< Updated upstream
+=======
+        <activity android:name=".SettingsActivity"/>
+>>>>>>> Stashed changes
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
