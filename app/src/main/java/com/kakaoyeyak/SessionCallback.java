@@ -2,6 +2,7 @@ package com.kakaoyeyak;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.kakao.auth.ISessionCallback;
@@ -72,7 +73,10 @@ public class SessionCallback implements ISessionCallback {
                             uuids.add(friend.getUUID());        // 친구 UUID를 uuids배열 리스트에 저장.
                             userids.add(String.valueOf(friend.getId()));
                             nicknames.add(friend.getProfileNickname());
-                            profileimages.add(friend.getProfileThumbnailImage());
+                            if(friend.getProfileThumbnailImage()!=null)
+                                profileimages.add(friend.getProfileThumbnailImage());
+                            else
+                                profileimages.add(Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.kakao_default_profile_image).toString());
                         }
 
                         Log.d("friend list", "session callback array size : " + uuids.size());

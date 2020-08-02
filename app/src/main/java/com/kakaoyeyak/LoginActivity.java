@@ -3,6 +3,7 @@ package com.kakaoyeyak;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -93,7 +94,10 @@ public class LoginActivity extends AppCompatActivity {
                                     uuids.add(friend.getUUID());        // 친구 UUID를 uuids배열 리스트에 저장.
                                     userids.add(String.valueOf(friend.getId()));
                                     nicknames.add(friend.getProfileNickname());
-                                    profileimages.add(friend.getProfileThumbnailImage());
+                                    if(friend.getProfileThumbnailImage()!=null)
+                                        profileimages.add(friend.getProfileThumbnailImage());
+                                    else
+                                        profileimages.add(Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.kakao_default_profile_image).toString());
 
                                     Log.d("KAKAO API", friend.getUUID() + friend.getId() + friend.getProfileNickname() + friend.getProfileThumbnailImage());
                                 }
