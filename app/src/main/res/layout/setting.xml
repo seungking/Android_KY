@@ -12,70 +12,32 @@
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_weight="1"
-        android:background="#F5F5F5"
         android:gravity="center"
-        android:text="3"
-        android:textColor="#9b92b3"
+        android:text="실험실 / 개발자 옵션"
+        android:textColor="@color/textPrimary"
+        android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/btn_horizontal_coordinator_ntb"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:background="#F5F5F5"
-        android:gravity="center"
-        android:text="4"
-        android:textColor="#9b92b3"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/btn_horizontal_top_ntb"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:background="#F5F5F5"
-        android:gravity="center"
-        android:text="5"
-        android:textColor="#9b92b3"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/btn_vertical_ntb"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_weight="1"
-        android:background="#F5F5F5"
-        android:gravity="center"
-        android:text="6"
-        android:textColor="#9b92b3"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/btn_samples_ntb"
+    <Button
+        android:id="@+id/btn_clearing"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_weight="1"
-        android:background="#F5F5F5"
         android:gravity="center"
-        android:text="5"
-        android:textColor="#9b92b3"
-        android:textStyle="bold" />
+        android:background="@color/accent"
+        android:text="데이터 강제 클리어" />
+
+    <Button
+        android:id="@+id/btn_sendme"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@color/textSecondary"
+        android:text="나에게 보내기" />
+
 
 </LinearLayout>
 
