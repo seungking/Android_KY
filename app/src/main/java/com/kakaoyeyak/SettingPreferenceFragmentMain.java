@@ -15,6 +15,7 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
     //    Preference keywordSoundPreference;
     Preference keywordScreen;
 
+
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         setPreferencesFromResource(R.xml.setting_main, s);

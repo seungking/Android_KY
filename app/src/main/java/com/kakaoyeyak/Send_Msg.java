@@ -166,13 +166,15 @@ public class Send_Msg extends Service {
 //                        }
 //                    });
 
-            Log.d("알람 번호 LOG", B_id.get(idx));
-            Log.d("보낸 시간 LOG", Time.get(idx));
-            Log.d("받는이 / 메세지 내용", Name.get(idx) + "  " + Message.get(idx) + "  ");
-            Log.d("LOG1","카톡 메세지 전송 끝. 해당 정보를 삭제합니다." + idx);
 
-            if(idx!=-1)adapter.removeItem(idx);
-            Log.d("LOG1","해당 정보 삭제 완료");
+            if(idx!=-1){
+                adapter.removeItem(idx);
+                Log.d("알람 번호 LOG", B_id.get(idx));
+                Log.d("보낸 시간 LOG", Time.get(idx));
+                Log.d("받는이 / 메세지 내용", Name.get(idx) + "  " + Message.get(idx) + "  ");
+                Log.d("LOG1","카톡 메세지 전송 끝. 해당 정보를 삭제합니다." + idx);
+            }
+            else  Log.d("LOG1","전송 실패");
 
         } else if (state.equals("off")) {
             // 알람음 재생 ON, 알람음 중지 상태
