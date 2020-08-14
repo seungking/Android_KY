@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                                     uuids.add(friend.getUUID());        // 친구 UUID를 uuids배열 리스트에 저장.
                                     userids.add(String.valueOf(friend.getId()));
                                     nicknames.add(friend.getProfileNickname());
-                                    if(friend.getProfileThumbnailImage()!=null)
+                                    if(friend.getProfileThumbnailImage().length()<5)
                                         profileimages.add(friend.getProfileThumbnailImage());
                                     else
                                         profileimages.add(Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.kakao_default_profile_image).toString());
@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
 
-                startActivity(new Intent(LoginActivity.this,HorizontalNtbActivity.class));
+                startActivity(new Intent(LoginActivity.this,OnBoardActivity.class));
                 finish();
             }
             //로그인 안될때

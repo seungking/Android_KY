@@ -73,7 +73,7 @@ public class SessionCallback implements ISessionCallback {
                             uuids.add(friend.getUUID());        // 친구 UUID를 uuids배열 리스트에 저장.
                             userids.add(String.valueOf(friend.getId()));
                             nicknames.add(friend.getProfileNickname());
-                            if(friend.getProfileThumbnailImage()!=null)
+                            if(friend.getProfileThumbnailImage().length()<5)
                                 profileimages.add(friend.getProfileThumbnailImage());
                             else
                                 profileimages.add(Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.kakao_default_profile_image).toString());
@@ -89,7 +89,7 @@ public class SessionCallback implements ISessionCallback {
 
 
 
-        Intent intent = new Intent(context, HorizontalNtbActivity.class); // 다음 넘어갈 클래스 지정
+        Intent intent = new Intent(context, OnBoardActivity.class); // 다음 넘어갈 클래스 지정
         context.startActivity(intent); // 다음 화면으로 넘어간다
     }
 
