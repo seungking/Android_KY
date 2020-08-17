@@ -122,11 +122,12 @@ public class YeyakMain extends AppCompatActivity {
             calendar.add(Calendar.DATE, 1);
         }
 
-        // 정보 저장
-        String strTime = "0" + String.valueOf(this.datePicker.getMonth()+1) + " 월 " +
-                        String.valueOf(this.datePicker.getDayOfMonth()) + " 일 " +
-                        String.valueOf(this.timePicker.getHour()) + " 시 " +
-                        String.valueOf(this.timePicker.getMinute()) + " 분";
+        String strTime = "";
+        strTime = (this.datePicker.getMonth()+1 > 10) ? strTime + String.valueOf(this.datePicker.getMonth()+1): strTime + "0" + String.valueOf(this.datePicker.getMonth()+1);
+        strTime = (this.datePicker.getDayOfMonth() > 10) ? strTime + String.valueOf(this.datePicker.getDayOfMonth()): strTime + "0" + String.valueOf(this.datePicker.getDayOfMonth());
+        strTime = (this.timePicker.getHour() > 10) ? strTime + String.valueOf(this.timePicker.getHour()): strTime + "0" + String.valueOf(this.timePicker.getHour());
+        strTime = (this.timePicker.getMinute() > 10) ? strTime + String.valueOf(this.timePicker.getMinute()): strTime + "0" + String.valueOf(this.timePicker.getMinute());
+        Log.d("log1","strTime : " + strTime);
 
         //사용자에게 값 받은
         //따로 레이아웃 추가하고 값 설정 필요
@@ -153,13 +154,22 @@ public class YeyakMain extends AppCompatActivity {
         this.pendingIntent = PendingIntent.getBroadcast(this, broadcastCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // 알람 설정
-        this.alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+//        this.alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        } else {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),0, pendingIntent);
+        }
 
         // Toast 보여주기 (알람 시간 표시)
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         Toast.makeText(this, "Alarm : " + format.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(YeyakMain.this,HorizontalNtbActivity.class));
+        finish();
     }
 
     /* 알람 중지 */

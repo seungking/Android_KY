@@ -28,11 +28,10 @@
             android:theme="@style/Theme.Slidr.Slidable"/>
         <activity android:name=".YeyakMain" />
         <activity android:name=".FriendsList" />
-        <activity android:name=".HorizontalNtbActivity" />
-
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SettingsActivity"/>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".HorizontalNtbActivity">
             
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

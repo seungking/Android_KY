@@ -3,6 +3,7 @@ package com.kakaoyeyak;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,9 +75,35 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
 
 
     public void removeItem(int position){
+
+        Log.d("LOG1","어뎁터 removeItem" + position);
+
+        ManagePref managePref = new ManagePref();
+
+        ArrayList<String> Time = managePref.getStringArrayPref(mContext,"time");
+        ArrayList<String> Id = managePref.getStringArrayPref(mContext,"id");
+        ArrayList<String> Name = managePref.getStringArrayPref(mContext,"name");
+        ArrayList<String> Message = managePref.getStringArrayPref(mContext,"message");
+        ArrayList<String> Profile = managePref.getStringArrayPref(mContext,"profile");
+
+        Time.remove(position);
+        Id.remove(position);
+        Name.remove(position);
+        Message.remove(position);
+        Profile.remove(position);
+
+
+        managePref.setStringArrayPref(mContext,"time",Time);
+        managePref.setStringArrayPref(mContext,"id",Id);
+        managePref.setStringArrayPref(mContext,"name",Name);
+        managePref.setStringArrayPref(mContext,"message",Message);
+        managePref.setStringArrayPref(mContext,"profile",Profile);
+
+        Log.d("LOG1","어뎁터 삭제완료");
         mPersons.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(0, mPersons.size());
+        Log.d("LOG1","어뎁터 업데이트");
     }
 
     //ViewHolder

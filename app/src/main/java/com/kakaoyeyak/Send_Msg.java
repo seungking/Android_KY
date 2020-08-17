@@ -30,8 +30,13 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.Nullable;
+
+import butterknife.BindView;
+
+import static com.kakaoyeyak.HorizontalNtbActivity.adapter;
 
 
 public class Send_Msg extends Service {
@@ -133,89 +138,69 @@ public class Send_Msg extends Service {
             // 현재 시간 -> 분 저장
             long now = System.currentTimeMillis();
             Date mDate = new Date(now);
-            SimpleDateFormat simpleDate = new SimpleDateFormat("MM 월 dd 일 HH 시 mm 분");
+            SimpleDateFormat simpleDate = new SimpleDateFormat("MMddHHmm");
             String getTime = simpleDate.format(mDate);
 
-
             Log.e("현재 시간과 비교합니다. 현재 시간",getTime);
-            // Minute.indexOf(getTime);
 
-            int idx = 0;
+            int idx = -1;
             for(int i=0;i < Time.size();i++){
-                SimpleDateFormat haveTime = new SimpleDateFormat("MM 월 dd 일 HH 시 mm 분");
-                Date finder = null;
-                Date nower = null;
-                try {
-                    finder = haveTime.parse(Time.get(i));
-                    nower = haveTime.parse(getTime);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                if(nower.compareTo(finder) == 0) {
+                Log.d("log1","Time.get() : " + Time.get(i));
+                Log.d("log1","gettime : " + getTime);
+                if(getTime.equals(Time.get(i))) {
                     Log.e("현재 시간과 동일한 인덱스를 찾았습니다. ", "동일 시간: "+Time.get(i)+"인덱스: "+i);
                     idx = i;
                     break;
                 }
             }
 
-            TemplateParams params = TextTemplate.newBuilder(Message.get(idx), LinkObject.newBuilder()
-                    .setWebUrl("https://developers.kakao.com")
-                    .setMobileWebUrl("https://developers.kakao.com").build()).build();
-            // 선택한 카카오 친구에게 보내기
-            KakaoTalkService.getInstance()
-                    .sendMessageToFriends(Collections.singletonList(Id.get(idx)), params, new TalkResponseCallback<MessageSendResponse>() {
-                        @Override
-                        public void onNotKakaoTalkUser() {
-                            Log.e("KAKAO_API", "카카오톡 사용자가 아님");
-                        }
+//            TemplateParams params = TextTemplate.newBuilder(Message.get(idx), LinkObject.newBuilder()
+//                    .setWebUrl("https://developers.kakao.com")
+//                    .setMobileWebUrl("https://developers.kakao.com").build()).build();
+//            // 선택한 카카오 친구에게 보내기
+//            KakaoTalkService.getInstance()
+//                    .sendMessageToFriends(Collections.singletonList(Id.get(idx)), params, new TalkResponseCallback<MessageSendResponse>() {
+//                        @Override
+//                        public void onNotKakaoTalkUser() {
+//                            Log.e("KAKAO_API", "카카오톡 사용자가 아님");
+//                        }
+//
+//                        @Override
+//                        public void onSessionClosed(ErrorResult errorResult) {
+//                            Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+//                        }
+//
+//                        @Override
+//                        public void onFailure(ErrorResult errorResult) {
+//                            Log.e("KAKAO_API", "친구에게 보내기 실패: " + errorResult);
+//                        }
+//
+//                        @Override
+//                        public void onSuccess(MessageSendResponse result) {
+//                            if (result.successfulReceiverUuids() != null) {
+//                                Log.i("KAKAO_API", "친구에게 보내기 성공");
+//                                Log.d("KAKAO_API", "전송에 성공한 대상: " + result.successfulReceiverUuids());
+//                            }
+//                            if (result.failureInfo() != null) {
+//                                Log.e("KAKAO_API", "일부 사용자에게 메시 보내기 실패");
+//                                for (MessageFailureInfo failureInfo : result.failureInfo()) {
+//                                    Log.d("KAKAO_API", "code: " + failureInfo.code());
+//                                    Log.d("KAKAO_API", "msg: " + failureInfo.msg());
+//                                    Log.d("KAKAO_API", "failure_uuids: " + failureInfo.receiverUuids());
+//                                }
+//                            }
+//                        }
+//                    });
 
-                        @Override
-                        public void onSessionClosed(ErrorResult errorResult) {
-                            Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
-                        }
 
-                        @Override
-                        public void onFailure(ErrorResult errorResult) {
-                            Log.e("KAKAO_API", "친구에게 보내기 실패: " + errorResult);
-                        }
-
-                        @Override
-                        public void onSuccess(MessageSendResponse result) {
-                            if (result.successfulReceiverUuids() != null) {
-                                Log.i("KAKAO_API", "친구에게 보내기 성공");
-                                Log.d("KAKAO_API", "전송에 성공한 대상: " + result.successfulReceiverUuids());
-                            }
-                            if (result.failureInfo() != null) {
-                                Log.e("KAKAO_API", "일부 사용자에게 메시 보내기 실패");
-                                for (MessageFailureInfo failureInfo : result.failureInfo()) {
-                                    Log.d("KAKAO_API", "code: " + failureInfo.code());
-                                    Log.d("KAKAO_API", "msg: " + failureInfo.msg());
-                                    Log.d("KAKAO_API", "failure_uuids: " + failureInfo.receiverUuids());
-                                }
-                            }
-                        }
-                    });
-
-            Log.d("알람 번호 LOG", B_id.get(idx));
-            Log.d("보낸 시간 LOG", Time.get(idx));
-            Log.d("받는이 / 메세지 내용", Name.get(idx) + "  " + Message.get(idx) + "  ");
-
-            Log.d("LOG1","카톡 메세지 전송 끝. 해당 정보를 삭제합니다.");
-            B_id.remove(idx);
-            Time.remove(idx);
-            Id.remove(idx);
-            Name.remove(idx);
-            Message.remove(idx);
-            Profile.remove(idx);
-            //로컬에 업데이트
-            managePref.setStringArrayPref(this,"BroadCastID",B_id);
-            managePref.setStringArrayPref(this,"hour",Time);
-            managePref.setStringArrayPref(this,"id",Id);
-            managePref.setStringArrayPref(this,"name",Name);
-            managePref.setStringArrayPref(this,"message",Message);
-            managePref.setStringArrayPref(this,"profile",Profile);
-
-            Log.d("LOG1","해당 정보 삭제 완료");
+            if(idx!=-1){
+                adapter.removeItem(idx);
+                Log.d("알람 번호 LOG", B_id.get(idx));
+                Log.d("보낸 시간 LOG", Time.get(idx));
+                Log.d("받는이 / 메세지 내용", Name.get(idx) + "  " + Message.get(idx) + "  ");
+                Log.d("LOG1","카톡 메세지 전송 끝. 해당 정보를 삭제합니다." + idx);
+            }
+            else  Log.d("LOG1","전송 실패");
 
         } else if (state.equals("off")) {
             // 알람음 재생 ON, 알람음 중지 상태
@@ -251,12 +236,12 @@ public class Send_Msg extends Service {
 
         Log.d("LOG1","알람 서비스를 종료합니다. 로컬 DB 연결 해제");
 
-        managePref.setStringArrayPref(this,"BroadCastID",B_id);
-        managePref.setStringArrayPref(this,"hour",Time);
-        managePref.setStringArrayPref(this,"id",Id);
-        managePref.setStringArrayPref(this,"name",Name);
-        managePref.setStringArrayPref(this,"message",Message);
-        managePref.setStringArrayPref(this,"profile",Profile);
+//        managePref.setStringArrayPref(this,"BroadCastID",B_id);
+//        managePref.setStringArrayPref(this,"hour",Time);
+//        managePref.setStringArrayPref(this,"id",Id);
+//        managePref.setStringArrayPref(this,"name",Name);
+//        managePref.setStringArrayPref(this,"message",Message);
+//        managePref.setStringArrayPref(this,"profile",Profile);
 
         Log.d("LOG1","로컬 DB 연결 해제 완료");
     }
