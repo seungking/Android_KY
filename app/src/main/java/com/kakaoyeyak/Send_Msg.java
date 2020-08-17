@@ -101,9 +101,11 @@ public class Send_Msg extends Service {
                 builder = new NotificationCompat.Builder(this);
             }
 
+            /*
             // 알람창 누를 시 앱으로 이동하는 인텐트
             Intent noti_intent = new Intent(this, HorizontalNtbActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 101, noti_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            */
 
             //알림창 제목
             builder.setContentTitle("예약카톡 전송완료");
@@ -115,12 +117,11 @@ public class Send_Msg extends Service {
             builder.setAutoCancel(true);
             //pendingIntent를 builder에 설정 해줍니다.
             // 알림창 터치시 인텐트가 전달할 수 있도록 해줍니다.
-            builder.setContentIntent(pendingIntent);
+            // builder.setContentIntent(pendingIntent);
             Notification notification = builder.build();
             //알림창 실행
             manager.notify(1,notification);
         }
-
 
         String state = intent.getStringExtra("state");
 
@@ -131,9 +132,7 @@ public class Send_Msg extends Service {
 
             Log.d("AlarmService", "Alarm Start");
             Log.d("LOG1","카톡 메세지를 전송합니다.");
-            // To Do
-            ///// 임시로 get(0)으로만 보내게 해봄. /////
-            // 텍스트 템플릿 만들기
+            // ---  To Do --- //
 
             // 현재 시간 -> 분 저장
             long now = System.currentTimeMillis();
@@ -153,45 +152,76 @@ public class Send_Msg extends Service {
                     break;
                 }
             }
+            /*
+            // 메세지 템플릿 만들기
+            TemplateParams params = TextTemplate.newBuilder(Message.get(idx), LinkObject.newBuilder()
+                    .setWebUrl("https://developers.kakao.com")
+                    .setMobileWebUrl("https://developers.kakao.com").build()).build();
 
-//            TemplateParams params = TextTemplate.newBuilder(Message.get(idx), LinkObject.newBuilder()
-//                    .setWebUrl("https://developers.kakao.com")
-//                    .setMobileWebUrl("https://developers.kakao.com").build()).build();
-//            // 선택한 카카오 친구에게 보내기
-//            KakaoTalkService.getInstance()
-//                    .sendMessageToFriends(Collections.singletonList(Id.get(idx)), params, new TalkResponseCallback<MessageSendResponse>() {
-//                        @Override
-//                        public void onNotKakaoTalkUser() {
-//                            Log.e("KAKAO_API", "카카오톡 사용자가 아님");
-//                        }
-//
-//                        @Override
-//                        public void onSessionClosed(ErrorResult errorResult) {
-//                            Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
-//                        }
-//
-//                        @Override
-//                        public void onFailure(ErrorResult errorResult) {
-//                            Log.e("KAKAO_API", "친구에게 보내기 실패: " + errorResult);
-//                        }
-//
-//                        @Override
-//                        public void onSuccess(MessageSendResponse result) {
-//                            if (result.successfulReceiverUuids() != null) {
-//                                Log.i("KAKAO_API", "친구에게 보내기 성공");
-//                                Log.d("KAKAO_API", "전송에 성공한 대상: " + result.successfulReceiverUuids());
-//                            }
-//                            if (result.failureInfo() != null) {
-//                                Log.e("KAKAO_API", "일부 사용자에게 메시 보내기 실패");
-//                                for (MessageFailureInfo failureInfo : result.failureInfo()) {
-//                                    Log.d("KAKAO_API", "code: " + failureInfo.code());
-//                                    Log.d("KAKAO_API", "msg: " + failureInfo.msg());
-//                                    Log.d("KAKAO_API", "failure_uuids: " + failureInfo.receiverUuids());
-//                                }
-//                            }
-//                        }
-//                    });
+            if(Id.get(idx).contains("@")){
+                Log.e("YEYAK SEND", "나에게 보내는 메세지");
+                // 기본 템플릿으로 나에게 보내기
+                KakaoTalkService.getInstance()
+                        .requestSendMemo(new TalkResponseCallback<Boolean>() {
+                            @Override
+                            public void onNotKakaoTalkUser() {
+                                Log.e("KAKAO_API", "카카오톡 사용자가 아님");
+                            }
 
+                            @Override
+                            public void onSessionClosed(ErrorResult errorResult) {
+                                Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+                            }
+
+                            @Override
+                            public void onFailure(ErrorResult errorResult) {
+                                Log.e("KAKAO_API", "나에게 보내기 실패: " + errorResult);
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                Log.i("KAKAO_API", "나에게 보내기 성공");
+                            }
+                        }, params);
+            }
+            else{
+              Log.e("YEYAK SEND", "친구에게 보내는 메세지");
+            // 선택한 카카오 친구에게 보내기
+            KakaoTalkService.getInstance()
+                    .sendMessageToFriends(Collections.singletonList(Id.get(idx)), params, new TalkResponseCallback<MessageSendResponse>() {
+                        @Override
+                        public void onNotKakaoTalkUser() {
+                            Log.e("KAKAO_API", "카카오톡 사용자가 아님");
+                        }
+
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+                            Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+                        }
+
+                        @Override
+                        public void onFailure(ErrorResult errorResult) {
+                            Log.e("KAKAO_API", "친구에게 보내기 실패: " + errorResult);
+                        }
+
+                        @Override
+                        public void onSuccess(MessageSendResponse result) {
+                            if (result.successfulReceiverUuids() != null) {
+                                Log.i("KAKAO_API", "친구에게 보내기 성공");
+                                Log.d("KAKAO_API", "전송에 성공한 대상: " + result.successfulReceiverUuids());
+                            }
+                            if (result.failureInfo() != null) {
+                                Log.e("KAKAO_API", "일부 사용자에게 메시 보내기 실패");
+                                for (MessageFailureInfo failureInfo : result.failureInfo()) {
+                                    Log.d("KAKAO_API", "code: " + failureInfo.code());
+                                    Log.d("KAKAO_API", "msg: " + failureInfo.msg());
+                                    Log.d("KAKAO_API", "failure_uuids: " + failureInfo.receiverUuids());
+                                }
+                            }
+                        }
+                    });
+            }
+            */
 
             if(idx!=-1){
                 adapter.removeItem(idx);

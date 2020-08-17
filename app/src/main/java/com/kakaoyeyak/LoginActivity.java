@@ -118,6 +118,11 @@ public class LoginActivity extends AppCompatActivity {
                                             nicknames.add(profile.getNickname());
                                             profileimages.add(profile.getProfileImageUrl());
 
+                                            managePref.setStringArrayPref(LoginActivity.this,"uuids",uuids);
+                                            managePref.setStringArrayPref(LoginActivity.this,"userids",userids);
+                                            managePref.setStringArrayPref(LoginActivity.this,"nicknames",nicknames);
+                                            managePref.setStringArrayPref(LoginActivity.this,"profileimages",profileimages);
+
                                         } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
                                             // 동의 요청 후 프로필 정보 획득 가능
 

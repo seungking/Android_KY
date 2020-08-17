@@ -116,10 +116,14 @@ public class HorizontalNtbActivity extends AppCompatActivity {
                 else {
                     //세팅
 
+                    LayoutInflater layoutInflater = getLayoutInflater();
+                    view = layoutInflater.inflate(R.layout.activity_setting, null);
+
+                    /*
                     view = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.setting, null, false);
 
-                    /*
+
                     view = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.activity_setting, null, false);
 

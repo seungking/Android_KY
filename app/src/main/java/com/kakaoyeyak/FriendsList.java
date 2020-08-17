@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.kakaoyeyak.sortedlist.ClearEditText;
