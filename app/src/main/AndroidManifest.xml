@@ -29,7 +29,6 @@
         <activity android:name=".YeyakMain" />
         <activity android:name=".FriendsList" />
         <activity android:name=".SettingsActivity" />
-
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".HorizontalNtbActivity">

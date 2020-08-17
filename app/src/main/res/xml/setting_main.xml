@@ -17,7 +17,7 @@
 
     <PreferenceCategory android:title="메인 설정">
 
-        <SwitchPreference
+        <Preference
             android:key="notification"
             android:title="알림"
             android:summary="예약 카톡 전송이 완료되었을 경우 상태 바에 '전송완료'를 노출할지 결정합니다."

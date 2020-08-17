@@ -21,6 +21,12 @@ import com.kakao.kakaotalk.callback.TalkResponseCallback;
 import com.kakao.kakaotalk.v2.KakaoTalkService;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.LoginButton;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.usermgmt.response.model.Profile;
+import com.kakao.usermgmt.response.model.UserAccount;
+import com.kakao.util.OptionalBoolean;
 
 import java.util.ArrayList;
 
@@ -64,7 +70,63 @@ public class LoginActivity extends AppCompatActivity {
         public void run(){
             //로그인 상태
             if(session.isOpened()){
-                Log.d("KAKAO API","Oepned in LoginActivity");
+                Log.d("KAKAO API","Opened in LoginActivity");
+                UserManagement.getInstance()
+                        .me(new MeV2ResponseCallback() {
+                                @Override
+                                public void onSessionClosed(ErrorResult errorResult) {
+                                    Log.e("KAKAO_API", "세션이 닫혀 있음: " + errorResult);
+                                }
+
+                                @Override
+                                public void onFailure(ErrorResult errorResult) {
+                                    Log.e("KAKAO_API", "사용자 정보 요청 실패: " + errorResult);
+                                }
+
+                                @Override
+                                public void onSuccess(MeV2Response result) {
+                                    Log.i("KAKAO_API", "사용자 아이디: " + result.getId());
+
+                                    UserAccount kakaoAccount = result.getKakaoAccount();
+                                    if (kakaoAccount != null) {
+
+                                        // 이메일
+                                        String email = kakaoAccount.getEmail();
+
+                                        if (email != null) {
+                                            Log.i("KAKAO_API", "email: " + email);
+
+                                        } else if (kakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
+                                            // 동의 요청 후 이메일 획득 가능
+                                            // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
+
+                                        } else {
+                                            // 이메일 획득 불가
+                                        }
+
+                                        // 프로필
+                                        Profile profile = kakaoAccount.getProfile();
+
+                                        if (profile != null) {
+                                            Log.d("KAKAO_API", "nickname: " + profile.getNickname());
+                                            Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
+                                            Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
+
+                                            // 소스 저장 후 DB 연결
+                                            uuids.add(email);
+                                            userids.add(String.valueOf(result.getId()));
+                                            nicknames.add(profile.getNickname());
+                                            profileimages.add(profile.getProfileImageUrl());
+
+                                        } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
+                                            // 동의 요청 후 프로필 정보 획득 가능
+
+                                        } else {
+                                            // 프로필 획득 불가
+                                        }
+                                    }
+                                }
+                        });
 
                 //친구리스트 받아서 로컬 DB 저장
                 KakaoTalkService.getInstance()
