@@ -44,6 +44,8 @@ public class HorizontalNtbActivity extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     static RecyclerViewAdapter_Msg adapter;
 
+    static View view;
+
     public static void removeItem(int position){
         adapter.removeItem(position);
     }
@@ -58,6 +60,14 @@ public class HorizontalNtbActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HorizontalNtbActivity.this, FriendsList.class));
+//                finish();
+                if(view!=null){
+                    Log.d("log1", "view not null!");
+                    ViewGroup parent = (ViewGroup)view.getParent();
+                    if(parent!=null){
+                        parent.removeView(view);
+                    }
+                }
             }
         });
     }
@@ -94,7 +104,6 @@ public class HorizontalNtbActivity extends AppCompatActivity {
             @SuppressLint("ResourceType")
             @Override
             public Object instantiateItem(final ViewGroup container, final int position) {
-                final View view;
                 //탭 바 위치에 따라서 레이아웃
                 if(position==0) {
                     view = LayoutInflater.from(
@@ -196,6 +205,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
             }
         }, 500);
     }
+
 
 
     private void initDataset() {
