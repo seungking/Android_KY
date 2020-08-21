@@ -78,12 +78,18 @@
         android:orientation="horizontal"
         android:weightSum="3">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/item_msg_detail_profile"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/kakao_default_profile_image" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/item_msg_detail_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/kakao_default_profile_image" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"

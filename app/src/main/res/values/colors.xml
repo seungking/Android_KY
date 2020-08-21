@@ -14,4 +14,14 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#666666</color>
     <color name="colorLightGrey">#999999</color>
+
+    <color name="white_sky">#9bbbd4</color>
+    <color name="white_white">#ffffff</color>
+    <color name="white_yellow">#fef01b</color>
+    <color name="white_gray">#556677</color>
+
+    <color name="dark_sky">#9bbbd4</color>
+    <color name="dark_white">#ffffff</color>
+    <color name="dark_yellow">#fef01b</color>
+    <color name="dark_gray">#556677</color>
 </resources>

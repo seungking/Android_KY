@@ -30,6 +30,7 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
 
+
         }
     };
 
