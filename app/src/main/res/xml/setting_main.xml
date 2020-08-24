@@ -12,16 +12,23 @@
         <Preference
             android:key="instruction"
             android:title="사용법"
-            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="kiman.androidmd"
+            android:targetClass="kiman.androidmd.OnBoardActivity" />
+        </Preference>
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="화면 설정">
 
-        <ListPreference
+        <SwitchPreference
             android:key="screen_mode"
             android:title="화면 모드"
-            android:summary="다크, 화이트"/>
+            android:switchTextOn="화이트모드 / 선택 시 다크모드"
+            android:switchTextOff="다크모드 / 선택 시 화이트모드"
+            android:defaultValue="false" />
 
         <Preference
             android:key="msg_template"
