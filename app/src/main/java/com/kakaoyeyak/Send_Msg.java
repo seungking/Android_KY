@@ -88,6 +88,10 @@ public class Send_Msg extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        String state = intent.getStringExtra("state");
+
+
         // 상단바 푸시 알람 체크 했다면 푸시 알람 나옴.
         if(isPushOn == true){
             builder = null; manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -101,11 +105,11 @@ public class Send_Msg extends Service {
                 builder = new NotificationCompat.Builder(this);
             }
 
-            /*
+
             // 알람창 누를 시 앱으로 이동하는 인텐트
             Intent noti_intent = new Intent(this, HorizontalNtbActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 101, noti_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            */
+
 
             //알림창 제목
             builder.setContentTitle("예약카톡 전송완료");
@@ -117,13 +121,11 @@ public class Send_Msg extends Service {
             builder.setAutoCancel(true);
             //pendingIntent를 builder에 설정 해줍니다.
             // 알림창 터치시 인텐트가 전달할 수 있도록 해줍니다.
-            // builder.setContentIntent(pendingIntent);
+            builder.setContentIntent(pendingIntent);
             Notification notification = builder.build();
             //알림창 실행
-            manager.notify(1,notification);
+            manager.notify(101,notification);
         }
-
-        String state = intent.getStringExtra("state");
 
         if (state.equals("on")) {
             // 알람음 재생 OFF, 알람음 시작 상태
@@ -232,16 +234,17 @@ public class Send_Msg extends Service {
             }
             else  Log.d("LOG1","전송 실패");
 
-        } else if (state.equals("off")) {
-            // 알람음 재생 ON, 알람음 중지 상태
-
+        }
+        // 알람음 재생 ON, 알람음 중지 상태
             this.isRunning = false;
             Log.d("AlarmService", "Alarm Stop");
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 stopForeground(true);
             }
-        }
+            else{
+                stopSelf();
+            }
 
         return START_NOT_STICKY;
     }

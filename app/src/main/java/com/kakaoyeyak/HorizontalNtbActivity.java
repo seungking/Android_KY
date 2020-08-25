@@ -60,7 +60,8 @@ public class HorizontalNtbActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HorizontalNtbActivity.this, FriendsList.class));
-//                finish();
+                finish();
+                /*
                 if(view!=null){
                     Log.d("log1", "view not null!");
                     ViewGroup parent = (ViewGroup)view.getParent();
@@ -68,6 +69,8 @@ public class HorizontalNtbActivity extends AppCompatActivity {
                         parent.removeView(view);
                     }
                 }
+
+                 */
             }
         });
     }

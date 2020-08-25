@@ -36,10 +36,7 @@ public class SettingPreferenceFragmentSub extends PreferenceFragmentCompat {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-            if (key.equals("keyword_sound_list")) {
-                Log.d("kkang", "keyword_sound_list : "+prefs.getString("keyword_sound_list", "카톡"));
-                keywordSoundPreference.setSummary(prefs.getString("keyword_sound_list", "카톡"));
-            }
+
         }
     };
 
