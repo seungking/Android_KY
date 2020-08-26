@@ -3,6 +3,7 @@ package com.kakaoyeyak;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -31,6 +32,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.Nullable;
@@ -81,21 +83,6 @@ public class Send_Msg extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Log.d("LOG1","처음으로 알람 서비스가 실행되었습니다. 로컬 DB 연결 시작");
-
-        B_id = managePref.getStringArrayPref(this,"BroadCastID");
-        Time = managePref.getStringArrayPref(this,"time");
-        Id = managePref.getStringArrayPref(this,"id");
-        Name = managePref.getStringArrayPref(this,"name");
-        Message = managePref.getStringArrayPref(this,"message");
-        Profile = managePref.getStringArrayPref(this,"profile");
-        // push 알림 get
-        arrSetNoti = managePref.getStringArrayPref(this,"isPush");
-        arrSetSound = managePref.getStringArrayPref(this,"isSound");
-        arrSetVibrate = managePref.getStringArrayPref(this,"isVibrate");
-
-        Log.d("LOG1","로컬 DB 연결 완료");
-
         // android.app.RemoteServiceException: Context.startForegroundService() 오류
         // 서비스가 stop되고 재실행되면 5초 이내로 startforeground를 해주어야 함.
         if (Build.VERSION.SDK_INT >= 26) {
@@ -116,6 +103,24 @@ public class Send_Msg extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        //SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // 데이터 복구
+        Log.d("LOG1","처음으로 알람 서비스가 실행되었습니다. 로컬 DB 연결 시작");
+
+        B_id = managePref.getStringArrayPref(this,"BroadCastID");
+        Time = managePref.getStringArrayPref(this,"time");
+        Id = managePref.getStringArrayPref(this,"id");
+        Name = managePref.getStringArrayPref(this,"name");
+        Message = managePref.getStringArrayPref(this,"message");
+        Profile = managePref.getStringArrayPref(this,"profile");
+        // push 알림 get
+        arrSetNoti = managePref.getStringArrayPref(this,"isPush");
+        arrSetSound = managePref.getStringArrayPref(this,"isSound");
+        arrSetVibrate = managePref.getStringArrayPref(this,"isVibrate");
+
+        Log.d("LOG1","로컬 DB 연결 완료");
 
         String state = intent.getStringExtra("state");
 
@@ -286,6 +291,7 @@ public class Send_Msg extends Service {
 
         }
         // 알람음 재생 ON, 알람음 중지 상태
+        /*
             this.isRunning = false;
             Log.d("AlarmService", "Alarm Stop");
 
@@ -295,6 +301,8 @@ public class Send_Msg extends Service {
             else{
                 stopSelf();
             }
+
+         */
 
         return START_NOT_STICKY;
     }

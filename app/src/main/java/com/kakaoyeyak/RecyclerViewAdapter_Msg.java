@@ -80,12 +80,15 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
 
         ManagePref managePref = new ManagePref();
 
+        ArrayList<String> B_id = managePref.getStringArrayPref(mContext,"BroadCastID");
         ArrayList<String> Time = managePref.getStringArrayPref(mContext,"time");
         ArrayList<String> Id = managePref.getStringArrayPref(mContext,"id");
         ArrayList<String> Name = managePref.getStringArrayPref(mContext,"name");
         ArrayList<String> Message = managePref.getStringArrayPref(mContext,"message");
         ArrayList<String> Profile = managePref.getStringArrayPref(mContext,"profile");
 
+
+        B_id.remove(position);
         Time.remove(position);
         Id.remove(position);
         Name.remove(position);
@@ -93,6 +96,7 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
         Profile.remove(position);
 
 
+        managePref.setStringArrayPref(mContext,"BroadCastID",B_id);
         managePref.setStringArrayPref(mContext,"time",Time);
         managePref.setStringArrayPref(mContext,"id",Id);
         managePref.setStringArrayPref(mContext,"name",Name);
