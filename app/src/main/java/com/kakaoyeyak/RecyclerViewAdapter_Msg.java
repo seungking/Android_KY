@@ -2,6 +2,7 @@ package com.kakaoyeyak;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,12 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
     private ArrayList<Item_Msg> mPersons;
     private LayoutInflater mInflate;
     private Context mContext;
+
+    static Boolean mode;
+
+    static public void setMode(Boolean in){
+        mode = in;
+    }
 
     public RecyclerViewAdapter_Msg(Context context, ArrayList<Item_Msg> persons) {
         this.mContext = context;
@@ -66,6 +73,14 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
                 v.getContext().startActivity(viewer);
             }
         });
+        if(mode) {
+            holder.layout.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.layout_inside.setBackgroundColor(Color.parseColor("#ffffff"));
+        }
+        else {
+            holder.layout.setBackgroundColor(Color.parseColor("#000000"));
+            holder.layout_inside.setBackgroundColor(Color.parseColor("#727272"));
+        }
     }
 
     @Override
@@ -112,6 +127,7 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
         public TextView item_text2;
         public TextView item_text3;
         RelativeLayout layout;
+        RelativeLayout layout_inside;
         CircleImageView circleImageView;
 
         public MyViewHolder(View itemView) {
@@ -122,6 +138,7 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
             item_text3 = (TextView) itemView.findViewById(R.id.item_text3);
             circleImageView = (CircleImageView) itemView.findViewById(R.id.item_msg_profile);
             layout = (RelativeLayout) itemView.findViewById(R.id.item_msg_layout);
+            layout_inside = (RelativeLayout) itemView.findViewById(R.id.item_msg_layout_inside);
         }
     }
 }
