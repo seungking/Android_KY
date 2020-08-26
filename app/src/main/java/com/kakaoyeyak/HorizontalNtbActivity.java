@@ -61,6 +61,8 @@ public class HorizontalNtbActivity extends AppCompatActivity {
 
     SharedPreferences pref;
 
+    BackPressCloseHandler backPressCloseHandler;
+
     public static void removeItem(int position){
         adapter.removeItem(position);
     }
@@ -73,6 +75,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         mode = pref.getBoolean("screen_mode",false);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
 //        //친구목록으로
         findViewById(R.id.addmessage).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,6 +238,12 @@ public class HorizontalNtbActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter_Msg(view1context, items);
         //뷰 연결
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
     }
 
     private void initDataset() {
