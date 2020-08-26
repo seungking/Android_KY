@@ -51,10 +51,6 @@
                     android:scheme="kakaod66f03b9620226301893094e59ff9023" />
             </intent-filter>
         </activity>
-        <activity android:name=".HorizontalNtbActivity"/>
-        <activity android:name=".OnBoardActivity">
-
-        </activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

@@ -53,6 +53,8 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.setting_main, s);
 
 
+        TypefaceUtil.overrideFont(getContext(), "SERIF", "fonts/imcresoojin.ttf");
+
         setNotification = (SwitchPreference)findPreference("set_notification");
         setSound = (SwitchPreference)findPreference("set_sound");
         setVibrate = (SwitchPreference)findPreference("set_vibrate");
@@ -171,6 +173,11 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
                 Log.e("알림 소리: ",arrSetVibrate.toString());
             }
 
+            if (key.equals("screen_mode")) {
+                mode = sharedPreferences.getBoolean("screen_mode", false);
+                ((HorizontalNtbActivity)getActivity()).setColor(mode);
+                setScreenMode(mode);
+            }
         }
     };
 
@@ -186,15 +193,6 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(prefListener);
     }
 
-
-
-            if (key.equals("screen_mode")) {
-                mode = sharedPreferences.getBoolean("screen_mode", false);
-                ((HorizontalNtbActivity)getActivity()).setColor(mode);
-                setScreenMode(mode);
-            }
-        }
-    };
 
     public void setScreenMode(Boolean mode){
         if (mode) {

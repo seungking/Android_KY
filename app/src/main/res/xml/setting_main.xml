@@ -87,6 +87,7 @@
             android:key="set_logout"
             android:title="로그아웃"
             app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+    </PreferenceCategory>
 
 
     <PreferenceCategory android:title="메시지 알림 설정">

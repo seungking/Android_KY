@@ -72,6 +72,8 @@ public class HorizontalNtbActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horizontal_ntb);
 
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/imcresoojin.ttf");
+
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         mode = pref.getBoolean("screen_mode",false);
 
@@ -142,6 +144,8 @@ public class HorizontalNtbActivity extends AppCompatActivity {
                     Log.d("log1", "position 0");
                     view1 = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.item_vp_list, null, false);
+
+                    TypefaceUtil.overrideFont(view1.getContext(), "SERIF", "fonts/imcresoojin.ttf");
 
                     view = view1;
 
