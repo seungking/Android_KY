@@ -6,7 +6,7 @@
     <color name="primary">#8BC34A</color>
     <color name="primaryDark">#FFEB3B</color>
     <color name="primaryLight">#000000</color>
-    <color name="accent">#FF4081</color>
+    <color name="accent">#000000</color>
     <color name="textPrimary">#212121</color>
     <color name="textSecondary">#727272</color>
     <color name="divider">#B6B6B6</color>
@@ -14,4 +14,14 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#666666</color>
     <color name="colorLightGrey">#999999</color>
+
+    <color name="white_sky">#9bbbd4</color>
+    <color name="white_white">#ffffff</color>
+    <color name="white_yellow">#fef01b</color>
+    <color name="white_gray">#556677</color>
+
+    <color name="dark_sky">#9bbbd4</color>
+    <color name="dark_white">#ffffff</color>
+    <color name="dark_yellow">#fef01b</color>
+    <color name="dark_gray">#556677</color>
 </resources>

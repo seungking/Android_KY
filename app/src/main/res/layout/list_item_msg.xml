@@ -17,6 +17,7 @@
     tools:ignore="UselessParent">
 
     <RelativeLayout
+        android:id="@+id/item_msg_layout_inside"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF">
