@@ -30,9 +30,11 @@
         <activity android:name=".FriendsList" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MainActivity" />
+
         <activity android:name=".LoginActivity"/>
         <activity android:name=".OnBoardActivity"/>
         <activity android:name=".HorizontalNtbActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,6 +50,10 @@
                     android:host="kakaolink"
                     android:scheme="kakaod66f03b9620226301893094e59ff9023" />
             </intent-filter>
+        </activity>
+        <activity android:name=".HorizontalNtbActivity"/>
+        <activity android:name=".OnBoardActivity">
+
         </activity>
 
         <meta-data

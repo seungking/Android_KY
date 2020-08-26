@@ -3,6 +3,7 @@ package com.kakaoyeyak;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -30,12 +32,14 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.Nullable;
 
 import butterknife.BindView;
 
+import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
 import static com.kakaoyeyak.HorizontalNtbActivity.adapter;
 
 
@@ -51,6 +55,10 @@ public class Send_Msg extends Service {
     ArrayList<String> Name = new ArrayList<String>();
     ArrayList<String> Message = new ArrayList<String>();
     ArrayList<String> Profile = new ArrayList<String>();
+    // push 알림 get
+    ArrayList<String> arrSetNoti = new ArrayList<String>();
+    ArrayList<String> arrSetSound = new ArrayList<String>();
+    ArrayList<String> arrSetVibrate = new ArrayList<String>();
 
     ManagePref managePref = new ManagePref();
 
@@ -61,7 +69,9 @@ public class Send_Msg extends Service {
     private static String CHANEL_NAME = "Channel1";
 
     private boolean isRunning;
-    private boolean isPushOn = true; // 푸시 알람 off: false / on: true
+    private boolean isPushOn = true; // 푸시 알림 off: false / on: true
+    private boolean isSoundOn = true; // 소리
+    private boolean isVibrateOn = true; // 진동
 
     @Nullable
     @Override
@@ -73,6 +83,30 @@ public class Send_Msg extends Service {
     public void onCreate() {
         super.onCreate();
 
+        // android.app.RemoteServiceException: Context.startForegroundService() 오류
+        // 서비스가 stop되고 재실행되면 5초 이내로 startforeground를 해주어야 함.
+        if (Build.VERSION.SDK_INT >= 26) {
+            String CHANNEL_ID = "my_service";
+            String CHANNEL_NAME = "My Background Service";
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    CHANNEL_NAME,NotificationManager.IMPORTANCE_NONE);
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(channel);
+
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setCategory(Notification.CATEGORY_SERVICE).setPriority(PRIORITY_MIN).build();
+
+            startForeground(101, notification);
+        }
+
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        //SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // 데이터 복구
         Log.d("LOG1","처음으로 알람 서비스가 실행되었습니다. 로컬 DB 연결 시작");
 
         B_id = managePref.getStringArrayPref(this,"BroadCastID");
@@ -81,13 +115,30 @@ public class Send_Msg extends Service {
         Name = managePref.getStringArrayPref(this,"name");
         Message = managePref.getStringArrayPref(this,"message");
         Profile = managePref.getStringArrayPref(this,"profile");
+        // push 알림 get
+        arrSetNoti = managePref.getStringArrayPref(this,"isPush");
+        arrSetSound = managePref.getStringArrayPref(this,"isSound");
+        arrSetVibrate = managePref.getStringArrayPref(this,"isVibrate");
 
         Log.d("LOG1","로컬 DB 연결 완료");
 
-    }
+        String state = intent.getStringExtra("state");
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+        if(arrSetNoti == null || arrSetNoti.get(0) == null){
+            Log.e("push 알람 오류","push 알람 데이터가 없습니다!. 푸시 알람이 자동 해제 됩니다.");
+            isPushOn = false;
+        }
+        else{
+            Log.e("push 알람","push 알람 데이터가 있습니다!. - "+arrSetNoti.get(0));
+            if(Boolean.valueOf(arrSetNoti.get(0)) == false){
+                isPushOn = false;
+            }
+            else{
+                isPushOn = true;
+            }
+        }
+
+
         // 상단바 푸시 알람 체크 했다면 푸시 알람 나옴.
         if(isPushOn == true){
             builder = null; manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -101,11 +152,16 @@ public class Send_Msg extends Service {
                 builder = new NotificationCompat.Builder(this);
             }
 
-            /*
+
             // 알람창 누를 시 앱으로 이동하는 인텐트
+            /*
             Intent noti_intent = new Intent(this, HorizontalNtbActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 101, noti_intent, PendingIntent.FLAG_UPDATE_CURRENT);
             */
+
+            Intent noti_intent = new Intent(this, HorizontalNtbActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, noti_intent, 0);
 
             //알림창 제목
             builder.setContentTitle("예약카톡 전송완료");
@@ -115,15 +171,16 @@ public class Send_Msg extends Service {
             builder.setSmallIcon(R.drawable.kakaotalk_icon);
             //알람창 터치시 자동 삭제
             builder.setAutoCancel(true);
-            //pendingIntent를 builder에 설정 해줍니다.
+            // pendingIntent를 builder에 설정 해줍니다.
             // 알림창 터치시 인텐트가 전달할 수 있도록 해줍니다.
-            // builder.setContentIntent(pendingIntent);
+            builder.setContentIntent(pendingIntent);
+            builder.setSound(null);
             Notification notification = builder.build();
-            //알림창 실행
-            manager.notify(1,notification);
-        }
 
-        String state = intent.getStringExtra("state");
+            //알림창 실행
+            Random notification_id = new Random();
+            manager.notify(notification_id.nextInt(100), notification);
+        }
 
         if (state.equals("on")) {
             // 알람음 재생 OFF, 알람음 시작 상태
@@ -232,16 +289,20 @@ public class Send_Msg extends Service {
             }
             else  Log.d("LOG1","전송 실패");
 
-        } else if (state.equals("off")) {
-            // 알람음 재생 ON, 알람음 중지 상태
-
+        }
+        // 알람음 재생 ON, 알람음 중지 상태
+        /*
             this.isRunning = false;
             Log.d("AlarmService", "Alarm Stop");
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 stopForeground(true);
             }
-        }
+            else{
+                stopSelf();
+            }
+
+         */
 
         return START_NOT_STICKY;
     }

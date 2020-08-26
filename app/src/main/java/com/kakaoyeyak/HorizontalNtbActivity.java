@@ -82,6 +82,18 @@ public class HorizontalNtbActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(HorizontalNtbActivity.this, FriendsList.class));
                 finish();
+
+                /*
+                if(view!=null){
+                    Log.d("log1", "view not null!");
+                    ViewGroup parent = (ViewGroup)view.getParent();
+                    if(parent!=null){
+                        parent.removeView(view);
+                    }
+                }
+
+                 */
+
             }
         });
     }
