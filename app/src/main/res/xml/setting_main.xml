@@ -34,13 +34,20 @@
             android:key="set_notification"
             android:title="알림"
             android:defaultValue="true"
-            android:summary="메세지 전송 시 push 알람"
-            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+            android:summaryOn="메세지 전송 시 push 알람을 받습니다"
+            android:summaryOff="메세지 전송 시 push 알람을 받지 않습니다."/>
 
-        <Preference
+        <SwitchPreference
             android:key="set_sound"
             android:title="소리"
-            app:fragment="com.kakaoyeyak.SettingPreferenceFragmentSub"/>
+            android:defaultValue="true"
+            android:dependency="set_notification"/>
+
+        <SwitchPreference
+            android:key="set_vibrate"
+            android:title="진동"
+            android:defaultValue="true"
+            android:dependency="set_notification"/>
 
     </PreferenceCategory>
 

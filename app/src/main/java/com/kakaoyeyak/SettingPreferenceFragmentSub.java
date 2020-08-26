@@ -11,24 +11,12 @@ import androidx.preference.PreferenceManager;
 public class SettingPreferenceFragmentSub extends PreferenceFragmentCompat {
     SharedPreferences prefs;
 
-    Preference keywordSoundPreference;
-
-
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         setPreferencesFromResource(R.xml.setting_sub, s);
 
-        if (s == null) {
-            keywordSoundPreference = findPreference("keyword_sound_list");
-
-            prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-            if (!prefs.getString("keyword_sound_list", "").equals("")) {
-                keywordSoundPreference.setSummary(prefs.getString("keyword_sound_list", "카톡"));
-            }
-
-            prefs.registerOnSharedPreferenceChangeListener(prefListener);
-        }
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs.registerOnSharedPreferenceChangeListener(prefListener);
 
     }
 
