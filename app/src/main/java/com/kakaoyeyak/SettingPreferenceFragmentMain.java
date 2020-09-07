@@ -92,14 +92,6 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        mode = prefs.getBoolean("screen_mode", false);
-        ((HorizontalNtbActivity)getActivity()).setColor(mode);
-        setScreenMode(mode);
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
         return view;
@@ -173,11 +165,6 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
                 Log.e("알림 소리: ",arrSetVibrate.toString());
             }
 
-            if (key.equals("screen_mode")) {
-                mode = sharedPreferences.getBoolean("screen_mode", false);
-                ((HorizontalNtbActivity)getActivity()).setColor(mode);
-                setScreenMode(mode);
-            }
         }
     };
 
@@ -193,16 +180,4 @@ public class SettingPreferenceFragmentMain extends PreferenceFragmentCompat {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(prefListener);
     }
 
-
-    public void setScreenMode(Boolean mode){
-        if (mode) {
-            Log.d("log1", "screen mode : black");
-            view.setBackgroundColor(Color.parseColor("#ffffff"));
-        } else {
-            Log.d("log1", "screen mode : black");
-            view.setBackgroundColor(Color.parseColor("#CFCECE"));
-        }
-
-
-    }
 }

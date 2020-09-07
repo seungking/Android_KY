@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceManager;
@@ -55,9 +56,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
 
     NavigationTabBar navigationTabBar;
     ViewPager viewPager;
-    LinearLayout topbar;
-
-    private Boolean mode;
+    ConstraintLayout topbar;
 
     SharedPreferences pref;
 
@@ -75,7 +74,6 @@ public class HorizontalNtbActivity extends AppCompatActivity {
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/imcresoojin.ttf");
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-        mode = pref.getBoolean("screen_mode",false);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 //        //친구목록으로
@@ -114,7 +112,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
 
         navigationTabBar = (NavigationTabBar)findViewById(R.id.ntb_horizontal);
         viewPager = (ViewPager)findViewById(R.id.vp_horizontal_ntb);
-        topbar = (LinearLayout)findViewById(R.id.topbar);
+        topbar = (ConstraintLayout)findViewById(R.id.topbar);
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -183,7 +181,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
                 //화면에 뷰 추가
                 container.addView(view);
                 //스크린 모드에 따른 색 설정
-                setColor(mode);
+//                setColor(mode);
                 return view;
             }
         });
@@ -250,7 +248,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
 
     public void connectView(){
 
-        adapter.setMode(pref.getBoolean("screen_mode",false));
+//        adapter.setMode(pref.getBoolean("screen_mode",false));
         adapter = new RecyclerViewAdapter_Msg(view1context, items);
         //뷰 연결
         recyclerView.setAdapter(adapter);
@@ -284,27 +282,14 @@ public class HorizontalNtbActivity extends AppCompatActivity {
     }
 
 
-   public void setColor(Boolean mode){
 
-        Log.d("log1", "setcolor  " + mode.toString());
-        if(mode){
-            navigationTabBar.setBackgroundColor(Color.parseColor("#ffffff"));
-            navigationTabBar.setActiveColor(Color.parseColor("#727272"));
-            navigationTabBar.setInactiveColor(Color.parseColor("#727272"));
-            navigationTabBar.setBgColor(Color.parseColor("#ffffff"));
-            viewPager.setBackgroundColor(Color.parseColor("#ffffff"));
-            topbar.setBackgroundColor(Color.parseColor("#ffffff"));
-            view1.setBackgroundColor(Color.parseColor("#ffffff"));
-        }
-        else{
-            navigationTabBar.setBackgroundColor(Color.parseColor("#727272"));
-            navigationTabBar.setActiveColor(Color.parseColor("#ffffff"));
-            navigationTabBar.setInactiveColor(Color.parseColor("#ffffff"));
-            navigationTabBar.setBgColor(Color.parseColor("#727272"));
-            viewPager.setBackgroundColor(Color.parseColor("#535353"));
-            topbar.setBackgroundColor(Color.parseColor("#232323"));
-            view1.setBackgroundColor(Color.parseColor("#cd5252"));
-        }
-        connectView();
-    }
+//        if(mode){
+//            navigationTabBar.setBackgroundColor(Color.parseColor("#ffffff"));
+//            navigationTabBar.setActiveColor(Color.parseColor("#727272"));
+//            navigationTabBar.setInactiveColor(Color.parseColor("#727272"));
+//            navigationTabBar.setBgColor(Color.parseColor("#ffffff"));
+//            viewPager.setBackgroundColor(Color.parseColor("#ffffff"));
+//            topbar.setBackgroundColor(Color.parseColor("#ffffff"));
+//            view1.setBackgroundColor(Color.parseColor("#ffffff"));
+
 }

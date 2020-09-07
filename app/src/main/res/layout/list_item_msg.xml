@@ -1,76 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_marginStart="4dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="1dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_msg_layout"
-    android:background="#ffffff"
-    android:padding="10dp"
-    android:paddingStart="14dp"
-    android:paddingTop="18dp"
-    android:paddingEnd="14dp"
-    android:paddingBottom="16dp"
-    tools:ignore="UselessParent">
-
-    <RelativeLayout
-        android:id="@+id/item_msg_layout_inside"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
+    android:background="#00ffffff">
 
         <TextView
             android:id="@+id/item_text1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/worksans_regular"
             android:layout_toEndOf="@+id/item_msg_profile"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toTopOf="@+id/item_text2"
+            app:layout_constraintEnd_toEndOf="parent"
             android:textColor="#3C4D54"
             android:textSize="13sp"
             tools:text="line1" />
 
-        <TextView
-            android:id="@+id/item_text2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_text1"
-            android:layout_alignStart="@+id/item_text1"
-            android:layout_alignEnd="@+id/item_text1"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/worksans_bold"
-            android:textColor="#1D2C2F"
-            android:textSize="18sp"
-            tools:text="APP NAME" />
+    <TextView
+        android:id="@+id/item_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/worksans_bold"
+        android:textColor="#1D2C2F"
+        android:textSize="15sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/item_msg_profile"
+        app:layout_constraintTop_toTopOf="@+id/item_msg_profile"
+        tools:text="APP NAME" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/item_msg_profile"
             style="@style/Expand.SenderAvatar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            tools:ignore="ContentDescription"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             tools:src="@drawable/kakao_default_profile_image" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corners"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:maxWidth="200dp"
+            app:layout_constraintStart_toEndOf="@+id/item_msg_profile"
+            app:layout_constraintTop_toBottomOf="@+id/item_text2">
 
         <TextView
             android:id="@+id/item_text3"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/item_text2"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="24dp"
-            android:drawablePadding="16dp"
             android:drawableTint="#45676E"
             android:drawableStart="@drawable/ic_baseline_arrow_right_24"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
+            android:maxWidth="250dp"
+            android:textSize="15dp"
+            android:fontFamily="@font/worksans_medium"
             android:textColor="#3A4A51"
             tools:text="BODY" />
+        </LinearLayout>
 
-    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>

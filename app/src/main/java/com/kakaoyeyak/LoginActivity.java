@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
 import com.kakao.friends.AppFriendContext;
@@ -57,13 +58,29 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (LoginButton)findViewById(R.id.btn_kakao_login);
         textView = (TextView)findViewById(R.id.need_login_text);
 
+        //Lottie Animation
+        LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.splash_logo);
+        animationView.setAnimation("loading.json");
+        animationView.loop(true);
+        //Lottie Animation start
+        animationView.playAnimation();
+
         session = Session.getCurrentSession();
         session.addCallback(sessionCallback);
 
-        //딜레이함수
-        Handler hd = new Handler();
-        hd.postDelayed(new splashhandler(), 2000);
-
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//                finish();
+                loginButton.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.VISIBLE);
+                animationView.setVisibility(View.INVISIBLE);
+                new splashhandler();
+            }
+        },1800);
     }
 
     private class splashhandler implements Runnable{

@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -28,12 +29,6 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
     private ArrayList<Item_Msg> mPersons;
     private LayoutInflater mInflate;
     private Context mContext;
-
-    static Boolean mode;
-
-    static public void setMode(Boolean in){
-        mode = in;
-    }
 
     public RecyclerViewAdapter_Msg(Context context, ArrayList<Item_Msg> persons) {
         this.mContext = context;
@@ -70,17 +65,9 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
                 viewer.putExtra("name",mPersons.get(position).getName());
                 viewer.putExtra("message",mPersons.get(position).getSummary());
                 viewer.putExtra("profile",mPersons.get(position).getProfileimage());
-                v.getContext().startActivity(viewer);
+                v.getContext().startActivity(viewer.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
-        if(mode) {
-            holder.layout.setBackgroundColor(Color.parseColor("#ffffff"));
-            holder.layout_inside.setBackgroundColor(Color.parseColor("#ffffff"));
-        }
-        else {
-            holder.layout.setBackgroundColor(Color.parseColor("#000000"));
-            holder.layout_inside.setBackgroundColor(Color.parseColor("#727272"));
-        }
     }
 
     @Override
@@ -130,8 +117,8 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
         public TextView item_text1;
         public TextView item_text2;
         public TextView item_text3;
-        RelativeLayout layout;
-        RelativeLayout layout_inside;
+        ConstraintLayout layout;
+        ConstraintLayout layout_inside;
         CircleImageView circleImageView;
 
         public MyViewHolder(View itemView) {
@@ -141,8 +128,7 @@ public class RecyclerViewAdapter_Msg extends RecyclerView.Adapter<RecyclerViewAd
             item_text2 = (TextView) itemView.findViewById(R.id.item_text2);
             item_text3 = (TextView) itemView.findViewById(R.id.item_text3);
             circleImageView = (CircleImageView) itemView.findViewById(R.id.item_msg_profile);
-            layout = (RelativeLayout) itemView.findViewById(R.id.item_msg_layout);
-            layout_inside = (RelativeLayout) itemView.findViewById(R.id.item_msg_layout_inside);
+            layout = (ConstraintLayout) itemView.findViewById(R.id.item_msg_layout);
         }
     }
 }

@@ -7,30 +7,42 @@
     android:weightSum="10"
     android:background="#FFFFFF">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:animationCache="true"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_weight="1.3">
 
-        <Button
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ky_logo"/>
+
+        <ImageView
             android:id="@+id/addmessage"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/com_kakao_button_background_press"
-            android:text="예약 메세지 추가하기"></Button>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/add_chat"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#000000"/>
         
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_horizontal_ntb"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8.6"
+        android:layout_weight="8"
         android:foregroundGravity="center|top"/>
 
     <devlight.io.library.ntb.NavigationTabBar
