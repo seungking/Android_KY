@@ -26,6 +26,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.util.ArrayList;
 
 import devlight.io.library.ntb.NavigationTabBar;
@@ -61,6 +67,7 @@ public class HorizontalNtbActivity extends AppCompatActivity {
     SharedPreferences pref;
 
     BackPressCloseHandler backPressCloseHandler;
+    private AdView mAdView;
 
     public static void removeItem(int position){
         adapter.removeItem(position);
@@ -70,6 +77,17 @@ public class HorizontalNtbActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horizontal_ntb);
+
+        //배너광고
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //
 
         TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/imcresoojin.ttf");
 
@@ -82,18 +100,6 @@ public class HorizontalNtbActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(HorizontalNtbActivity.this, FriendsList.class));
                 finish();
-
-                /*
-                if(view!=null){
-                    Log.d("log1", "view not null!");
-                    ViewGroup parent = (ViewGroup)view.getParent();
-                    if(parent!=null){
-                        parent.removeView(view);
-                    }
-                }
-
-                 */
-
             }
         });
     }
