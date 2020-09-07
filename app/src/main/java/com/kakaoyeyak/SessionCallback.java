@@ -43,6 +43,7 @@ public class SessionCallback implements ISessionCallback {
     // 로그인에 성공한 상태
     @Override
     public void onSessionOpened() {
+        Log.d("friend list", "session callback array size : " + uuids.size());
         requestMe();
         Log.d("KAKAO API","Session Opend");
 
@@ -148,6 +149,18 @@ public class SessionCallback implements ISessionCallback {
                             } else {
                                 // 프로필 획득 불가
                             }
+                            // 소스 저장 후 DB 연결
+                            uuids.add(email);
+                            userids.add(String.valueOf(result.getId()));
+                            nicknames.add(profile.getNickname());
+                            profileimages.add(profile.getProfileImageUrl());
+                            Log.d("friend list", "session callback array size : " + uuids.size());
+
+                            managePref.setStringArrayPref(context,"uuids",uuids);
+                            managePref.setStringArrayPref(context,"userids",userids);
+                            managePref.setStringArrayPref(context,"nicknames",nicknames);
+                            managePref.setStringArrayPref(context,"profileimages",profileimages);
+
                         }
                     }
                 });

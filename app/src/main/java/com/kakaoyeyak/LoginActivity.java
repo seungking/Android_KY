@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.i("KAKAO_API", "사용자 아이디: " + result.getId());
 
                                     UserAccount kakaoAccount = result.getKakaoAccount();
+
                                     if (kakaoAccount != null) {
 
                                         // 이메일
@@ -129,23 +130,27 @@ public class LoginActivity extends AppCompatActivity {
                                             Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
                                             Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
 
-                                            // 소스 저장 후 DB 연결
-                                            uuids.add(email);
-                                            userids.add(String.valueOf(result.getId()));
-                                            nicknames.add(profile.getNickname());
-                                            profileimages.add(profile.getProfileImageUrl());
-
-                                            managePref.setStringArrayPref(LoginActivity.this,"uuids",uuids);
-                                            managePref.setStringArrayPref(LoginActivity.this,"userids",userids);
-                                            managePref.setStringArrayPref(LoginActivity.this,"nicknames",nicknames);
-                                            managePref.setStringArrayPref(LoginActivity.this,"profileimages",profileimages);
-
                                         } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
                                             // 동의 요청 후 프로필 정보 획득 가능
 
                                         } else {
                                             // 프로필 획득 불가
                                         }
+
+                                        // 소스 저장 후 DB 연결
+                                        uuids.add(email);
+                                        userids.add(String.valueOf(result.getId()));
+                                        nicknames.add(profile.getNickname());
+                                        profileimages.add(profile.getProfileImageUrl());
+
+
+                                        managePref.setStringArrayPref(LoginActivity.this,"uuids",uuids);
+                                        managePref.setStringArrayPref(LoginActivity.this,"userids",userids);
+                                        managePref.setStringArrayPref(LoginActivity.this,"nicknames",nicknames);
+                                        managePref.setStringArrayPref(LoginActivity.this,"profileimages",profileimages);
+
+
+
                                     }
                                 }
                         });
@@ -191,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                                 managePref.setStringArrayPref(LoginActivity.this,"userids",userids);
                                 managePref.setStringArrayPref(LoginActivity.this,"nicknames",nicknames);
                                 managePref.setStringArrayPref(LoginActivity.this,"profileimages",profileimages);
-//                                Log.d("friend list","uuid : " + uuids.get(0) + "  userids : " + userids.get(0) + "   nickname : " + nicknames.get(0) + "   profileimage : " + profileimage.get(0));
+
 
                             }
                         });
