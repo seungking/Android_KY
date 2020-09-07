@@ -14,7 +14,7 @@ public class ManagePref {
 
     public ArrayList<String> getStringArrayPref(Context context, String str) {
         String string = PreferenceManager.getDefaultSharedPreferences(context).getString(str, null);
-        ArrayList arrayList = new ArrayList();
+        ArrayList<String> arrayList = new ArrayList();
         if (string != null) {
             try {
                 JSONArray jSONArray = new JSONArray(string);
