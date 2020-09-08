@@ -2,4 +2,11 @@
     <string name="app_name">KakaoYeyak</string>
     <string name="kakao_app_key">d66f03b9620226301893094e59ff9023</string>
     <string name="temp_string">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
+
+    <string name="year">년</string>
+    <string name="day">일</string>
+    <string name="month">월</string>
+    <string name="hour">시</string>
+    <string name="minute">분</string>
+    <string name="second">초</string>
 </resources>

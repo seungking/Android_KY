@@ -12,9 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.DatePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +28,8 @@ import com.kakao.message.template.LinkObject;
 import com.kakao.message.template.TemplateParams;
 import com.kakao.message.template.TextTemplate;
 import com.kakao.network.ErrorResult;
+import com.kakaoyeyak.ui.DatePicker;
+import com.kakaoyeyak.ui.TimePicker;
 
 public class YeyakMain extends AppCompatActivity {
 
@@ -109,9 +109,11 @@ public class YeyakMain extends AppCompatActivity {
     private void start() {
 
         // 시간 설정
+
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.MONTH, this.datePicker.getMonth());
-        calendar.set(Calendar.DAY_OF_MONTH, this.datePicker.getDayOfMonth());
+        calendar = this.datePicker.getCalendar();
+        //calendar.set(Calendar.MONTH, this.datePicker.getMonth());
+        //calendar.set(Calendar.DAY_OF_MONTH, this.datePicker.getDayOfMonth());
         calendar.set(Calendar.HOUR_OF_DAY, this.timePicker.getHour());
         calendar.set(Calendar.MINUTE, this.timePicker.getMinute());
         calendar.set(Calendar.SECOND, 0);
@@ -123,8 +125,9 @@ public class YeyakMain extends AppCompatActivity {
         }
 
         String strTime = "";
-        strTime = (this.datePicker.getMonth()+1 > 10) ? strTime + String.valueOf(this.datePicker.getMonth()+1): strTime + "0" + String.valueOf(this.datePicker.getMonth()+1);
-        strTime = (this.datePicker.getDayOfMonth() > 10) ? strTime + String.valueOf(this.datePicker.getDayOfMonth()): strTime + "0" + String.valueOf(this.datePicker.getDayOfMonth());
+        strTime = (this.datePicker.getCalendar().toString());
+        //strTime = (this.datePicker.getMonth()+1 > 10) ? strTime + String.valueOf(this.datePicker.getMonth()+1): strTime + "0" + String.valueOf(this.datePicker.getMonth()+1);
+        //strTime = (this.datePicker.getDayOfMonth() > 10) ? strTime + String.valueOf(this.datePicker.getDayOfMonth()): strTime + "0" + String.valueOf(this.datePicker.getDayOfMonth());
         strTime = (this.timePicker.getHour() > 10) ? strTime + String.valueOf(this.timePicker.getHour()): strTime + "0" + String.valueOf(this.timePicker.getHour());
         strTime = (this.timePicker.getMinute() > 10) ? strTime + String.valueOf(this.timePicker.getMinute()): strTime + "0" + String.valueOf(this.timePicker.getMinute());
         Log.d("log1","strTime : " + strTime);
