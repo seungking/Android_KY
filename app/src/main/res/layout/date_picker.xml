@@ -20,7 +20,7 @@
             android:gravity="center"
             android:textColor="#fff"
             android:text="@string/year"
-            android:background="@drawable/circle_green"
+            android:background="#999999"
             android:layout_width="@dimen/diameter"
             android:layout_height="@dimen/diameter" />
 
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:textColor="#fff"
             android:text="@string/month"
-            android:background="@drawable/circle_green"
+            android:background="#999999"
             android:layout_width="@dimen/diameter"
             android:layout_height="@dimen/diameter" />
 
@@ -42,7 +42,7 @@
             android:gravity="center"
             android:textColor="#fff"
             android:text="@string/day"
-            android:background="@drawable/circle_green"
+            android:background="#999999"
             android:layout_width="@dimen/diameter"
             android:layout_height="@dimen/diameter" />
     </LinearLayout>

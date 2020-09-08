@@ -37,6 +37,8 @@ public class SessionCallback implements ISessionCallback {
     ManagePref managePref = new ManagePref();
 
     private Context context;
+
+
     public SessionCallback(Context context){
         this.context = context;
     }
@@ -93,6 +95,7 @@ public class SessionCallback implements ISessionCallback {
         Intent intent = new Intent(context, OnBoardActivity.class); // 다음 넘어갈 클래스 지정
         context.startActivity(intent); // 다음 화면으로 넘어간다
     }
+
 
     // 로그인에 실패한 상태
     @Override

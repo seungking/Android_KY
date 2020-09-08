@@ -29,11 +29,11 @@
         <activity android:name=".YeyakMain" />
         <activity android:name=".FriendsList" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
 
         <activity android:name=".HorizontalNtbActivity"/>
         <activity android:name=".OnBoardActivity"/>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

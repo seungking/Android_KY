@@ -43,7 +43,7 @@ public class OnBoardActivity extends AppCompatActivity {
             }
             else{
                 // 다 끝나면 인증창으로
-                startActivity(new Intent(OnBoardActivity.this,HorizontalNtbActivity.class));
+                startActivity(new Intent(OnBoardActivity.this,MainActivity.class));
                 finish();
             }
         });

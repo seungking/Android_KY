@@ -121,14 +121,6 @@ public class FriendsList extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Log.d("log1", "friendlist backpressed!");
-        startActivity(new Intent(FriendsList.this,HorizontalNtbActivity.class));
-        finish();
-    }
-
 //    private List<Item_Friend> filledData(String[] date) {
 //        List<Item_Friend> mSortList = new ArrayList<>();
 //
@@ -203,4 +195,9 @@ public class FriendsList extends AppCompatActivity {
         adapter.updateList(filterDateList);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

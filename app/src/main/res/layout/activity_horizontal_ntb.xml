@@ -32,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/add_chat"
+            android:src="@drawable/ic_noun_new_message_641795"
             android:layout_marginEnd="20dp"
             android:backgroundTint="#000000"/>
         

@@ -1,58 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:weightSum="10"
+    android:background="#ffffff"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_custom_login"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.3">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/ky_logo2"/>
+
+
+            <ImageButton
+                android:id="@+id/addmessage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_noun_new_message_641795"
+                android:background="#ffffff"
+                android:layout_marginEnd="20dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8.7">
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카카오 로그인" />
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/frameHomeContainer"></FrameLayout>
 
-    <com.kakao.usermgmt.LoginButton
-        android:id="@+id/btn_kakao_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btn_custom_login_out"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카카오 로그아웃" />
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/coordinator_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fitsSystemWindows="false"
+        android:clickable="false"
+        android:focusable="false">
 
-    <Button
-        android:id="@+id/btn_custom_msg_me"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카카오 나에게 메세지 보내기" />
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:adSize="BANNER"
+            android:layout_gravity="bottom|center"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            android:layout_marginBottom="70dp" />
 
-    <Button
-        android:id="@+id/btn_custom_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카카오 친구 목록 조회하기" />
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_app"
+            android:layout_gravity="bottom"
+            android:clickable="false"
+            app:fabAlignmentMode="center"
+            app:fabCradleRoundedCornerRadius="16dp"
+            android:theme="@style/AppTheme.BottomAppbar"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            android:background="@android:color/transparent">
 
-    <Button
-        android:id="@+id/btn_custom_msg_you"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="카카오 친구에게 메세지 보내기" />
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/bottom_nav"
+                app:itemIconSize="35dp"
+                android:background="@android:color/transparent"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/menu_main"
+                android:outlineAmbientShadowColor="@android:color/transparent"
+                android:outlineSpotShadowColor="@android:color/transparent"/>
 
-    <Button
-        android:id="@+id/kakaoLinkBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="KAKAO LINK"
-        android:onClick="btnClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.bottomappbar.BottomAppBar>
 
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

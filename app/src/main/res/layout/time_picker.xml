@@ -23,7 +23,7 @@
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:text="@string/hour"
-                android:background="@drawable/circle_green"
+                android:background="#999999"
                 android:layout_width="@dimen/diameter"
                 android:layout_height="@dimen/diameter" />
 
@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:textColor="#fff"
                 android:text="@string/minute"
-                android:background="@drawable/circle_green"
+                android:background="#999999"
                 android:layout_width="@dimen/diameter"
                 android:layout_height="@dimen/diameter" />
         </LinearLayout>
