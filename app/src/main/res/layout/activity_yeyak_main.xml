@@ -6,82 +6,134 @@
     android:layout_height="match_parent"
     tools:context="com.kakaoyeyak.YeyakMain"
     android:orientation="vertical"
+    android:layout_margin="15dp"
+    android:weightSum="10"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
     android:gravity="top">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:fontFamily="@font/g_bold"
+        android:layout_gravity="center"
+        android:textSize="25dp"
+        android:layout_weight="0.5"
+        android:textColor="#000000"
+        android:layout_marginTop="30dp"
+        android:text="시간을 선택해 주세요"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="2.6"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="30dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="날짜와 요일, 시간을 선택해 주세요."/>
 
         <com.kakaoyeyak.ui.DatePicker
             android:id="@+id/date_picker"
             android:background="#fff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="match_parent" />
 
     </LinearLayout>
-    <LinearLayout
 
+    <LinearLayout
+        android:layout_weight="2.6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_height="0dp">
 
         <com.kakaoyeyak.ui.TimePicker
             android:id="@+id/time_picker"
-            android:layout_marginTop="30dp"
             android:background="#fff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="예약 카톡 메시지 입력">
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:fontFamily="@font/g_bold"
+        android:layout_gravity="center"
+        android:textSize="25dp"
+        android:layout_weight="0.5"
+        android:textColor="#000000"
+        android:layout_marginTop="30dp"
+        android:text="내용을 적어 주세요"/>
 
-    </TextView>
+
     <EditText
         android:id="@+id/katok_msg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:lines="5"
         android:inputType="textMultiLine"
         android:scrollHorizontally="false"
         android:minWidth="10.0dip"
         android:maxWidth="5.0dip"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
     </EditText>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_height="0dp">
 
-        <Button
+        <stream.custombutton.CustomButton
             android:id="@+id/btn_start"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="보내기" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="확인"
+            android:textSize="18sp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/g_bold"
+            app:btn_cornerRadius="20dp"
+            app:btn_strokeWidth="1dp"
+            app:btn_strokeColor="#000000"
+            app:btn_buttonColor="#00ffffff"
+            app:btn_buttonSelectColor="#000000"
+            app:btn_textColor="#000000"
+            app:btn_textSelectColor="#00ffffff"/>
 
-        <Button
+        <stream.custombutton.CustomButton
             android:id="@+id/btn_finish"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="뒤로가기" />
-
-        <Button
-            android:id="@+id/btn_clear"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:text="데이터 클리어"
-            android:visibility="invisible"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="취소"
+            android:textSize="18sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:fontFamily="@font/g_bold"
+            app:btn_cornerRadius="20dp"
+            app:btn_strokeWidth="1dp"
+            app:btn_strokeColor="#000000"
+            app:btn_buttonColor="#00ffffff"
+            app:btn_buttonSelectColor="#000000"
+            app:btn_textColor="#000000"
+            app:btn_textSelectColor="#00ffffff"/>
 
     </LinearLayout>
 

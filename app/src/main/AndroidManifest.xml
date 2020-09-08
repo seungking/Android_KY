@@ -26,14 +26,14 @@
         android:theme="@style/Theme.Slidr">
         <activity android:name=".Item_Msg_Detail"
             android:theme="@style/Theme.Slidr.Slidable"/>
-        <activity android:name=".YeyakMain" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".FriendsList" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".LoginActivity" />
 
         <activity android:name=".HorizontalNtbActivity"/>
         <activity android:name=".OnBoardActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".YeyakMain">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

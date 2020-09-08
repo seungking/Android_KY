@@ -66,10 +66,10 @@ public class YeyakMain extends AppCompatActivity {
         // 전 페이지에서 선택한 유저들 정보 intent에 담아 보낸걸 여기서 받음.
         // 어뎁터프렌드-putExtra -> 예약메인-getExtra
         intent = getIntent(); // 데이터 수신
-        UID = intent.getExtras().getString("UserUID");
-        ID = intent.getExtras().getString("UserID");
-        NName = intent.getExtras().getString("UserName");
-        ProfileUri = intent.getExtras().getString("ProfileUri");
+//        UID = intent.getExtras().getString("UserUID");
+//        ID = intent.getExtras().getString("UserID");
+//        NName = intent.getExtras().getString("UserName");
+//        ProfileUri = intent.getExtras().getString("ProfileUri");
 
         // 로그로 선택된 사람 확인해보라고 남겨놨음.
         // I/보낼 사람 UID,ID,Name:: 4dPm0ObT49ThzfrD8MDzy_rK5tLn1uXS4JI/1395494438/안승기
@@ -83,7 +83,7 @@ public class YeyakMain extends AppCompatActivity {
 
         findViewById(R.id.btn_start).setOnClickListener(mClickListener);
         findViewById(R.id.btn_finish).setOnClickListener(mClickListener);
-        findViewById(R.id.btn_clear).setOnClickListener(mClickListener);
+//        findViewById(R.id.btn_clear).setOnClickListener(mClickListener);
 
         //시작 시 정보 받아옴
         //저장된 배열에 추가로 저장을 하고 다시 저장할거여서
@@ -171,7 +171,7 @@ public class YeyakMain extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         Toast.makeText(this, "Alarm : " + format.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(YeyakMain.this,HorizontalNtbActivity.class));
+        startActivity(new Intent(YeyakMain.this,MainActivity.class));
         finish();
     }
 
@@ -192,7 +192,7 @@ public class YeyakMain extends AppCompatActivity {
 
         this.pendingIntent = null;
 
-        startActivity(new Intent(YeyakMain.this,HorizontalNtbActivity.class));
+        startActivity(new Intent(YeyakMain.this,MainActivity.class));
     }
 
     View.OnClickListener mClickListener = new View.OnClickListener() {
@@ -215,31 +215,31 @@ public class YeyakMain extends AppCompatActivity {
 
                     break;
 
-                case R.id.btn_clear:
-
-                    //clearing();
-                    // 데이터 쌓이면 클리어.
-                    B_id.clear();
-                    Time.clear();
-                    Id.clear();
-                    Name.clear();
-                    Message.clear();
-                    //로컬에 업데이트
-                    managePref.setStringArrayPref(YeyakMain.this,"BroadCastID",B_id);
-                    managePref.setStringArrayPref(YeyakMain.this,"time",Time);
-                    managePref.setStringArrayPref(YeyakMain.this,"id",Id);
-                    managePref.setStringArrayPref(YeyakMain.this,"name",Name);
-                    managePref.setStringArrayPref(YeyakMain.this,"message",Message);
-                    managePref.setStringArrayPref(YeyakMain.this,"profile",Profile);
-                    // 현재까지 저장된 넘들 확인해봄.
-                    Log.e("BroadCastID",B_id.toString());
-                    Log.e("Time", Time.toString());
-                    Log.e("UUID",Id.toString());
-                    Log.e("Name",Name.toString());
-                    Log.e("Msg",Message.toString());
-                    Log.e("Profile",Profile.toString());
-
-                    break;
+//                case R.id.btn_clear:
+//
+//                    //clearing();
+//                    // 데이터 쌓이면 클리어.
+//                    B_id.clear();
+//                    Time.clear();
+//                    Id.clear();
+//                    Name.clear();
+//                    Message.clear();
+//                    //로컬에 업데이트
+//                    managePref.setStringArrayPref(YeyakMain.this,"BroadCastID",B_id);
+//                    managePref.setStringArrayPref(YeyakMain.this,"time",Time);
+//                    managePref.setStringArrayPref(YeyakMain.this,"id",Id);
+//                    managePref.setStringArrayPref(YeyakMain.this,"name",Name);
+//                    managePref.setStringArrayPref(YeyakMain.this,"message",Message);
+//                    managePref.setStringArrayPref(YeyakMain.this,"profile",Profile);
+//                    // 현재까지 저장된 넘들 확인해봄.
+//                    Log.e("BroadCastID",B_id.toString());
+//                    Log.e("Time", Time.toString());
+//                    Log.e("UUID",Id.toString());
+//                    Log.e("Name",Name.toString());
+//                    Log.e("Msg",Message.toString());
+//                    Log.e("Profile",Profile.toString());
+//
+//                    break;
             }
         }
     };

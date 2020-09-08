@@ -18,9 +18,9 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:text="@string/year"
-            android:background="#999999"
+            android:background="#ffffff"
             android:layout_width="@dimen/diameter"
             android:layout_height="@dimen/diameter" />
 
@@ -29,9 +29,9 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:gravity="center"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:text="@string/month"
-            android:background="#999999"
+            android:background="#ffffff"
             android:layout_width="@dimen/diameter"
             android:layout_height="@dimen/diameter" />
 
@@ -40,9 +40,9 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:textColor="#fff"
+            android:textColor="#000000"
             android:text="@string/day"
-            android:background="#999999"
+            android:background="#ffffff"
             android:layout_width="@dimen/diameter"
             android:layout_height="@dimen/diameter" />
     </LinearLayout>
