@@ -32,6 +32,8 @@ import butterknife.OnClick;
 import butterknife.internal.Utils;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.kakaoyeyak.HorizontalNtbActivity.removeItem;
+
 public class Item_Msg_Detail extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -118,7 +120,7 @@ public class Item_Msg_Detail extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                HorizontalNtbActivity.removeItem(position);
+                MainActivity.removeItem(position, getApplicationContext());
                 finish();
             }
         });

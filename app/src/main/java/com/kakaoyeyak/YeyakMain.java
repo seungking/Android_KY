@@ -66,13 +66,13 @@ public class YeyakMain extends AppCompatActivity {
         // 전 페이지에서 선택한 유저들 정보 intent에 담아 보낸걸 여기서 받음.
         // 어뎁터프렌드-putExtra -> 예약메인-getExtra
         intent = getIntent(); // 데이터 수신
-//        UID = intent.getExtras().getString("UserUID");
-//        ID = intent.getExtras().getString("UserID");
-//        NName = intent.getExtras().getString("UserName");
-//        ProfileUri = intent.getExtras().getString("ProfileUri");
+        UID = intent.getExtras().getString("UserUID");
+        ID = intent.getExtras().getString("UserID");
+        NName = intent.getExtras().getString("UserName");
+        ProfileUri = intent.getExtras().getString("ProfileUri");
 
-        // 로그로 선택된 사람 확인해보라고 남겨놨음.
-        // I/보낼 사람 UID,ID,Name:: 4dPm0ObT49ThzfrD8MDzy_rK5tLn1uXS4JI/1395494438/안승기
+//         로그로 선택된 사람 확인해보라고 남겨놨음.
+//         I/보낼 사람 UID,ID,Name:: 4dPm0ObT49ThzfrD8MDzy_rK5tLn1uXS4JI/1395494438/안승기
         Log.i("보낼 사람 UID,ID,Name: ",UID+"/"+ID+"/"+NName+"/"+ProfileUri);
 
         this.alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -111,9 +111,9 @@ public class YeyakMain extends AppCompatActivity {
         // 시간 설정
 
         Calendar calendar = Calendar.getInstance();
-        calendar = this.datePicker.getCalendar();
-        //calendar.set(Calendar.MONTH, this.datePicker.getMonth());
-        //calendar.set(Calendar.DAY_OF_MONTH, this.datePicker.getDayOfMonth());
+        calendar.set(Calendar.YEAR, this.datePicker.getYear());
+        calendar.set(Calendar.MONTH, this.datePicker.getMonth());
+        calendar.set(Calendar.DAY_OF_MONTH, this.datePicker.getDay());
         calendar.set(Calendar.HOUR_OF_DAY, this.timePicker.getHour());
         calendar.set(Calendar.MINUTE, this.timePicker.getMinute());
         calendar.set(Calendar.SECOND, 0);
@@ -125,9 +125,9 @@ public class YeyakMain extends AppCompatActivity {
         }
 
         String strTime = "";
-        strTime = (this.datePicker.getCalendar().toString());
-        //strTime = (this.datePicker.getMonth()+1 > 10) ? strTime + String.valueOf(this.datePicker.getMonth()+1): strTime + "0" + String.valueOf(this.datePicker.getMonth()+1);
-        //strTime = (this.datePicker.getDayOfMonth() > 10) ? strTime + String.valueOf(this.datePicker.getDayOfMonth()): strTime + "0" + String.valueOf(this.datePicker.getDayOfMonth());
+        //strTime = (this.datePicker.getCalendar().toString());
+        strTime = (this.datePicker.getMonth()+1 > 10) ? strTime + String.valueOf(this.datePicker.getMonth()+1): strTime + "0" + String.valueOf(this.datePicker.getMonth()+1);
+        strTime = (this.datePicker.getDay() > 10) ? strTime + String.valueOf(this.datePicker.getDay()): strTime + "0" + String.valueOf(this.datePicker.getDay());
         strTime = (this.timePicker.getHour() > 10) ? strTime + String.valueOf(this.timePicker.getHour()): strTime + "0" + String.valueOf(this.timePicker.getHour());
         strTime = (this.timePicker.getMinute() > 10) ? strTime + String.valueOf(this.timePicker.getMinute()): strTime + "0" + String.valueOf(this.timePicker.getMinute());
         Log.d("log1","strTime : " + strTime);

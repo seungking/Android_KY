@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imgViewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:adjustViewBounds="true"
         android:src="@drawable/p1"
         android:layout_marginTop="80dp"

@@ -1,14 +1,18 @@
 package com.kakaoyeyak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -38,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
 
     LoginButton loginButton;
     TextView textView;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     ArrayList<String> uuids = new ArrayList<String>();
     ArrayList<String> userids = new ArrayList<String>();
@@ -54,6 +60,9 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = pref.edit();
 
         loginButton = (LoginButton)findViewById(R.id.btn_kakao_login);
         textView = (TextView)findViewById(R.id.need_login_text);
@@ -201,7 +210,14 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
 
-                startActivity(new Intent(LoginActivity.this,OnBoardActivity.class));
+                if(pref.getInt("isfirst",0)==0){
+                    editor.putInt("isfirst",1);
+                    editor.commit();
+                    startActivity(new Intent(LoginActivity.this,OnBoardActivity.class));
+                }
+                else{
+                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                }
                 finish();
             }
             //로그인 안될때

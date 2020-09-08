@@ -89,6 +89,16 @@ public class DatePicker extends FrameLayout {
         updateTime();
     }
 
+    public int getYear(){
+        return this.mCalendar.get(Calendar.YEAR);
+    }
+    public int getMonth(){
+        return this.mCalendar.get(Calendar.MONTH);
+    }
+    public int getDay(){
+        return this.mCalendar.get(Calendar.DAY_OF_MONTH);
+    }
+
     public Calendar getCalendar() {
         return mCalendar;
     }

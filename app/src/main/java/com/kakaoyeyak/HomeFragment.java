@@ -40,11 +40,10 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-    static RecyclerViewAdapter_Msg adapter;
 
-    public static void removeItem(int position){
-        adapter.removeItem(position);
-    }
+//    public void removeItem(int position){
+//        adapter.removeItem(position);
+//    }
 
     public HomeFragment(){}
 
@@ -84,8 +83,8 @@ public class HomeFragment extends Fragment {
             items.add(new Item_Msg(Time.get(i)  ,Name.get(i),  Message.get(i),Profile.get(i)));
 
 
-        adapter = new RecyclerViewAdapter_Msg(view.getContext(), items);
-        recyclerView.setAdapter(adapter);
+        ((MainActivity)getActivity()).adapter = new RecyclerViewAdapter_Msg(view.getContext(), items);
+        recyclerView.setAdapter(((MainActivity)getActivity()).adapter);
     }
 
 }

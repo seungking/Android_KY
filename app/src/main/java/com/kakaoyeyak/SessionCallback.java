@@ -1,9 +1,13 @@
 package com.kakaoyeyak;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.friends.AppFriendContext;
@@ -30,6 +34,8 @@ public class SessionCallback implements ISessionCallback {
     ArrayList<String> userids = new ArrayList<String>();
     ArrayList<String> nicknames = new ArrayList<String>();
     ArrayList<String> profileimages = new ArrayList<String>();
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     AppFriendContext context_friend =
             new AppFriendContext(AppFriendOrder.NICKNAME, 0, 100, "asc");
@@ -94,6 +100,19 @@ public class SessionCallback implements ISessionCallback {
 
         Intent intent = new Intent(context, OnBoardActivity.class); // 다음 넘어갈 클래스 지정
         context.startActivity(intent); // 다음 화면으로 넘어간다
+
+        pref = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = pref.edit();
+
+        if(pref.getInt("isfirst",0)==0){
+            editor.putInt("isfirst",1);
+            editor.commit();
+            context.startActivity(new Intent(context,OnBoardActivity.class));
+        }
+        else{
+            context.startActivity(new Intent(context,MainActivity.class));
+        }
+        ((Activity)context).finish();
     }
 
 

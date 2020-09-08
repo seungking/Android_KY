@@ -25,18 +25,21 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.drawable.p1,
             R.drawable.p2,
             R.drawable.p3,
+            R.drawable.p4
     };
 
     private String titles[] ={
-            "Learn",
-            "Create",
-            "Enjoy"
+            "주의사항",
+            "사용 방법1",
+            "사용 방법2",
+            "이렇게 보내집니다"
     };
 
     private String descs[] ={
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts.",
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts.",
-            "lorem  ipsum dolor contraint spaces dolor ipsum loremters termainal lorem ispsum contanirnts."
+            "앱의 절전 모드를 꺼주세요. 정상 작동이 불가능할 수 있습니다. \n 앱을 완전히 끄지 말아주세요. 서비스 이용에 제한됩니다. :(",
+            "오른쪽 상단의 메세지 추가 아이콘을 클릭하고 친구 목록 중 보낼 친구를 선택해주세요 :)",
+            "예약할 날짜, 시간을 선택하고 예약 메세지를 입력해주세요 :)",
+            "일단 잡숴봐~"
     };
 
     @Override

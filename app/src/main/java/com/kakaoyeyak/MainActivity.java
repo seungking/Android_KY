@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private static final int GALLERY_ADD_POST = 2;
     private AdView mAdView;
 
+    static RecyclerViewAdapter_Msg adapter;
     BackPressCloseHandler backPressCloseHandler;
+
+    public static void removeItem(int position, Context context){
+        adapter.removeItem(position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

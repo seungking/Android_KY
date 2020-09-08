@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 import butterknife.BindView;
 
 import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
-import static com.kakaoyeyak.HorizontalNtbActivity.adapter;
+import static com.kakaoyeyak.MainActivity.adapter;
 
 
 public class Send_Msg extends Service {
@@ -209,7 +209,7 @@ public class Send_Msg extends Service {
                     break;
                 }
             }
-            /*
+
             // 메세지 템플릿 만들기
             TemplateParams params = TextTemplate.newBuilder(Message.get(idx), LinkObject.newBuilder()
                     .setWebUrl("https://developers.kakao.com")
@@ -278,7 +278,7 @@ public class Send_Msg extends Service {
                         }
                     });
             }
-            */
+
 
             if(idx!=-1){
                 adapter.removeItem(idx);

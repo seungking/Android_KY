@@ -50,15 +50,21 @@ public class OnBoardActivity extends AppCompatActivity {
 
         btnLeft.setOnClickListener(v->{
             // 페이지 3으로 바로 이동
-            viewPager.setCurrentItem(viewPager.getCurrentItem()+2);
+            viewPager.setCurrentItem(viewPager.getCurrentItem()+3);
         });
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 
     //뷰페이저 점 추가
     private void addDots(int position){
         dotsLayout.removeAllViews();
-        dots = new TextView[3];
+        dots = new TextView[4];
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
             //점 생성하는 html 코드
@@ -97,6 +103,12 @@ public class OnBoardActivity extends AppCompatActivity {
                 btnLeft.setEnabled(false);
                 btnRight.setText("Next");
             }
+            else if(position==2){
+                btnLeft.setVisibility(View.GONE);
+                btnLeft.setEnabled(false);
+                btnRight.setText("Next");
+            }
+
             else{
                 btnLeft.setVisibility(View.GONE);
                 btnLeft.setEnabled(false);
