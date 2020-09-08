@@ -18,14 +18,11 @@
             android:layout_height="wrap_content"
             android:text="날짜와 요일, 시간을 선택해 주세요."/>
 
-        <DatePicker
+        <com.kakaoyeyak.ui.DatePicker
             android:id="@+id/date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false">
-
-        </DatePicker>
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
@@ -33,11 +30,13 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TimePicker
+
+        <com.kakaoyeyak.ui.TimePicker
             android:id="@+id/time_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:timePickerMode="spinner"/>
+            android:layout_marginTop="30dp"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -67,13 +66,14 @@
             android:id="@+id/btn_finish"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="강제종료" />
+            android:text="뒤로가기" />
 
         <Button
             android:id="@+id/btn_clear"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:text="데이터 클리어" />
+            android:text="데이터 클리어"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 
